@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Créditos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      color: #fff;
+    }
+
+    /* ====================================================
+       WRAPPER — tela inteira, clipada
+       ==================================================== */
+    #creditos-wrapper {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background: #000;
+      transform-origin: center center;
+    }
+
+    /* ====================================================
+       ROLO — o conteúdo que sobe
+       ==================================================== */
+    #creditos-rolo {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      padding: 0 1.5rem;
+      will-change: transform;
+    }
+
+    /* ====================================================
+       SPACERS
+       ==================================================== */
+    .sp-top    { height: 20vh; }
+    .sp-medio  { height: 15vh; }
+    .sp-bottom { height: 110vh; }
+
+    /* ====================================================
+       BLOCOS — grid de 3 colunas: img-esq | texto | img-dir
+       ==================================================== */
+    .bloco {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr 1fr;
+      gap: 1.5rem;
+      align-items: center;
+      max-width: 860px;
+      margin: 0 auto 5rem;
+    }
+
+    .col-esq { display: flex; justify-content: flex-end;   align-items: center; }
+    .col-dir { display: flex; justify-content: flex-start; align-items: center; }
+    .col-txt { text-align: center; }
+
+    /* ====================================================
+       IMAGENS — quase transparentes, staircase
+       ==================================================== */
+    .cr-img {
+      width: 100%;
+      max-width: 190px;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      opacity: 0.18;
+      filter: grayscale(25%) contrast(0.85);
+    }
+
+    /* staircase: imagens dos blocos pares descem um pouco */
+    .bloco:nth-child(even) .cr-img { margin-top: 90px; }
+
+    /* ====================================================
+       TEXTO DOS CRÉDITOS
+       ==================================================== */
+    .item { margin-bottom: 2.5rem; }
+    .item:last-child { margin-bottom: 0; }
+
+    .categoria {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: rgba(196, 168, 224, 0.5);
+      line-height: 1.8;
+      margin-bottom: 0.6rem;
+    }
+
+    .valor {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.65;
+    }
+
+    .valor--sm {
+      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+      color: rgba(255, 255, 255, 0.55);
+      margin-top: 0.35rem;
+    }
+
+    /* motivadores: cada um na própria linha como nome de ator */
+    .motivadores-lista .valor { font-size: clamp(1.1rem, 2vw, 1.5rem); }
+
+    /* ====================================================
+       SEÇÃO FINAL — imagem 7 + CONTINUA
+       ==================================================== */
+    #creditos-final {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      opacity: 0;
+      transition: opacity 2.5s ease;
+    }
+
+    #creditos-final.visivel { opacity: 1; }
+
+    #imagem-final {
+      width: min(72vw, 680px);
+      height: auto;
+      border-radius: 6px;
+      display: block;
+      filter: brightness(0.5) saturate(0.65);
+    }
+
+    #texto-continua {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 13vw, 10rem);
+      color: #fff;
+      letter-spacing: 0.08em;
+      position: absolute;
+      bottom: 14%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      text-shadow: 0 0 60px rgba(255, 255, 255, 0.25);
+    }
+
+    /* ====================================================
+       GLITCH
+       ==================================================== */
+    .glitchando {
+      animation: glitch 0.11s infinite alternate-reverse;
+    }
+
+    @keyframes glitch {
+      0%   { transform: translateX(-50%) translate(0, 0); color: #fff; clip-path: none; }
+      15%  { transform: translateX(-50%) translate(-5px, 2px) skewX(-4deg); color: #f0f; }
+      30%  { transform: translateX(-50%) translate(5px, -2px); color: #0ff;
+             clip-path: polygon(0 15%, 100% 15%, 100% 40%, 0 40%); }
+      45%  { transform: translateX(-50%) translate(-3px, 3px) skewX(3deg); color: #fff; clip-path: none; }
+      60%  { transform: translateX(-50%) translate(4px, -1px); color: #f0f;
+             clip-path: polygon(0 55%, 100% 55%, 100% 78%, 0 78%); }
+      75%  { transform: translateX(-50%) translate(-2px, 2px); color: #0ff; }
+      100% { transform: translateX(-50%) translate(3px, -2px) skewX(-2deg); color: #fff; }
+    }
+
+    /* ====================================================
+       TV DESLIGANDO
+       ==================================================== */
+    @keyframes tv-off {
+      0%   { transform: scaleY(1) scaleX(1); filter: brightness(1); opacity: 1; }
+      18%  { transform: scaleY(1) scaleX(1); filter: brightness(4.5); opacity: 1; }
+      32%  { transform: scaleY(0.012) scaleX(1); filter: brightness(5); opacity: 1; }
+      50%  { transform: scaleY(0.012) scaleX(0.4); filter: brightness(3); opacity: 1; }
+      65%  { transform: scaleY(0.006) scaleX(0.08); filter: brightness(1.5); opacity: 0.7; }
+      80%  { transform: scaleY(0.002) scaleX(0.015); opacity: 0.3; }
+      100% { transform: scaleY(0) scaleX(0); opacity: 0; }
+    }
+
+    #creditos-wrapper.tv-off {
+      animation: tv-off 1.8s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+    }
+
+    /* ====================================================
+       OVERLAY PRETO FINAL
+       ==================================================== */
+    #tela-preta {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    #tela-preta.visivel { opacity: 1; pointer-events: auto; }
+
+    /* ====================================================
+       SKIP
+       ==================================================== */
+    #btn-skip {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 500;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: rgba(255,255,255,0.25);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.4rem 0.8rem;
+      transition: color 0.2s;
+    }
+    #btn-skip:hover { color: rgba(255,255,255,0.6); }
+  </style>
+</head>
+
+<body>
+
+<div id="creditos-wrapper">
+  <div id="creditos-rolo">
+
+    <div class="sp-top"></div>
+
+    <!-- BLOCO 1: Direção + Roteiro | IMG 1 esquerda -->
+    <div class="bloco">
+      <div class="col-esq">
+        <img class="cr-img" src="assets/creditos/1.png" alt="" aria-hidden="true" />
+      </div>
+      <div class="col-txt">
+        <div class="item">
+          <p class="categoria">Direção</p>
+          <p class="valor">Acaso</p>
+        </div>
+        <div class="item">
+          <p class="categoria">Roteiro</p>
+          <p class="valor">Uma mente incansável</p>
+          <p class="valor valor--sm">3 amizades improváveis, que surgiram do amor<br>incondicional por uma pessoa especial.</p>
+        </div>
+      </div>
+      <div class="col-dir"></div>
+    </div>
+
+    <!-- BLOCO 2: Direção de arte | IMG 2 direita -->
+    <div class="bloco">
+      <div class="col-esq"></div>
+      <div class="col-txt">
+        <div class="item">
+          <p class="categoria">Direção de arte</p>
+          <p class="valor">Mexinha</p>
+        </div>
+      </div>
+      <div class="col-dir">
+        <img class="cr-img" src="assets/creditos/2.png" alt="" aria-hidden="true" />
+      </div>
+    </div>
+
+    <!-- BLOCO 3: Consultoria psicológica | IMG 3 esquerda -->
+    <div class="bloco">
+      <div class="col-esq">
+        <img class="cr-img" src="assets/creditos/3.png" alt="" aria-hidden="true" />
+      </div>
+      <div class="col-txt">
+        <div class="item">
+          <p class="categoria">Consultoria psicológica<br>não solicitada</p>
+          <p class="valor">Thinha</p>
+          <p class="valor valor--sm">(kkk tenho que dizer, adorei isso aqui)</p>
+        </div>
+      </div>
+      <div class="col-dir"></div>
+    </div>
+
+    <!-- BLOCO 4: Elenco felino | IMG 4 direita -->
+    <div class="bloco">
+      <div class="col-esq"></div>
+      <div class="col-txt">
+        <div class="item">
+          <p class="categoria">Elenco felino</p>
+          <p class="valor">Aquela cambada toda,<br>inclusive a gente kkkkkk</p>
+        </div>
+      </div>
+      <div class="col-dir">
+        <img class="cr-img" src="assets/creditos/4.png" alt="" aria-hidden="true" />
+      </div>
+    </div>
+
+    <!-- BLOCO 5: Trilha sonora | IMG 5 esquerda -->
+    <div class="bloco">
+      <div class="col-esq">
+        <img class="cr-img" src="assets/creditos/5.png" alt="" aria-hidden="true" />
+      </div>
+      <div class="col-txt">
+        <div class="item">
+          <p class="categoria">Trilha sonora</p>
+          <p class="valor">da nossa vida até aqui.</p>
+        </div>
+      </div>
+      <div class="col-dir"></div>
+    </div>
+
+    <!-- BLOCO 6: Motivadores | IMG 6 direita -->
+    <div class="bloco">
+      <div class="col-esq"></div>
+      <div class="col-txt motivadores-lista">
+        <div class="item">
+          <p class="categoria">Motivadores</p>
+          <p class="valor">pringles de cebola</p>
+          <p class="valor">11:11</p>
+          <p class="valor">gatos</p>
+          <p class="valor">sonhos em comum</p>
+          <p class="valor">penela de arroz elétrica</p>
+          <p class="valor">tão sonhado micro-ondas</p>
+          <p class="valor">jogos</p>
+          <p class="valor">calls</p>
+          <p class="valor">tédio</p>
+          <p class="valor">fome</p>
+          <p class="valor">sono</p>
+          <p class="valor">amor</p>
+          <p class="valor">paixão</p>
+          <p class="valor">força de vontade</p>
+          <p class="valor">paciência</p>
+        </div>
+      </div>
+      <div class="col-dir">
+        <img class="cr-img" src="assets/creditos/6.png" alt="" aria-hidden="true" />
+      </div>
+    </div>
+
+    <!-- BLOCO 7: Produção (sem imagem) -->
+    <div class="bloco">
+      <div class="col-esq"></div>
+      <div class="col-txt">
+        <div class="item">
+          <p class="categoria">Produção</p>
+          <p class="valor">Mexithinha Studios</p>
+        </div>
+      </div>
+      <div class="col-dir"></div>
+    </div>
+
+    <div class="sp-medio"></div>
+
+    <!-- FINAL: imagem 7 centralizada + CONTINUA -->
+    <div id="creditos-final">
+      <img id="imagem-final" src="assets/creditos/7.png" alt="" aria-hidden="true" />
+      <p id="texto-continua">CONTINUA</p>
+    </div>
+
+    <div class="sp-bottom"></div>
+
+  </div><!-- /creditos-rolo -->
+</div><!-- /creditos-wrapper -->
+
+<!-- overlay preto pós-TV -->
+<div id="tela-preta"></div>
+
+<button id="btn-skip" aria-label="Pular créditos">PULAR</button>
+
+<script>
+(function () {
+  'use strict';
+
+  const wrapper    = document.getElementById('creditos-wrapper');
+  const rolo       = document.getElementById('creditos-rolo');
+  const finalSec   = document.getElementById('creditos-final');
+  const continua   = document.getElementById('texto-continua');
+  const telaPreta  = document.getElementById('tela-preta');
+  const btnSkip    = document.getElementById('btn-skip');
+
+  const SPEED = 52; // px/s — ajuste aqui para mais rápido ou mais lento
+  let encerrado = false;
+
+  function encerrar() {
+    if (encerrado) return;
+    encerrado = true;
+
+    // Glitch
+    continua.classList.add('glitchando');
+
+    setTimeout(function () {
+      continua.classList.remove('glitchando');
+      continua.style.display = 'none';
+
+      // TV off
+      wrapper.classList.add('tv-off');
+
+      setTimeout(function () {
+        telaPreta.classList.add('visivel');
+      }, 1800);
+    }, 2800);
+  }
+
+  window.addEventListener('load', function () {
+    var h  = rolo.offsetHeight;
+    var vh = window.innerHeight;
+
+    var startY = vh;
+    var endY   = -h;
+    var travel = h + vh;
+    var dur    = travel / SPEED; // segundos
+
+    // Cria keyframe dinamicamente para evitar limitações de var() em @keyframes
+    var style = document.createElement('style');
+    style.textContent =
+      '@keyframes subir {' +
+      '  from { transform: translateY(' + startY + 'px); }' +
+      '  to   { transform: translateY(' + endY + 'px); }' +
+      '}';
+    document.head.appendChild(style);
+
+    rolo.style.animation = 'subir ' + dur + 's linear forwards';
+
+    // Quando a seção final chega ao centro da tela
+    var finalMid  = finalSec.offsetTop + finalSec.offsetHeight * 0.5;
+    var tAppear   = Math.max(0, (startY + finalSec.offsetTop - vh * 1.1) / SPEED);
+    var tCenter   = (startY + finalMid - vh * 0.5) / SPEED;
+
+    // Fade in da seção final
+    setTimeout(function () {
+      finalSec.classList.add('visivel');
+    }, tAppear * 1000);
+
+    // Glitch + encerramento quando centrada
+    setTimeout(encerrar, tCenter * 1000);
+  });
+
+  // Pular créditos
+  function pular() {
+    rolo.style.animation = 'none';
+    finalSec.classList.add('visivel');
+    setTimeout(encerrar, 2500);
+    btnSkip.style.display = 'none';
+  }
+
+  btnSkip.addEventListener('click', pular);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' || e.key === ' ') pular();
+  });
+})();
+</script>
+
+</body>
+</html>

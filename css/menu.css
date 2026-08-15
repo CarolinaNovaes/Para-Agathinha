@@ -409,6 +409,23 @@ body.home.etapa-livre {
   transition: background 0.4s ease;
 }
 
+/* Link de creditos */
+.btn-creditos {
+  display: inline-block;
+  margin-top: 3rem;
+  font-family: var(--fonte-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(196, 168, 224, 0.35);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.btn-creditos:hover {
+  color: rgba(196, 168, 224, 0.75);
+}
+
 /* Scrollbar discreta */
 .etapa--3::-webkit-scrollbar { width: 4px; }
 .etapa--3::-webkit-scrollbar-track { background: transparent; }
