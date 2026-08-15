@@ -329,7 +329,7 @@ body.home.etapa-livre {
 }
 
 .porta-link:hover .porta-foto {
-  opacity: 0.55;
+  opacity: 0.9;
   transform: scale(1);
 }
 
@@ -344,7 +344,7 @@ body.home.etapa-livre {
 }
 
 .porta-link:hover .porta-svg {
-  opacity: 0.6;
+  opacity: 0.08;
 }
 
 /* "Entrar" que aparece no hover */
