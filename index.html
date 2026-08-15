@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Feito com Amor — um lugar pra Agatha." />
+  <meta name="theme-color" content="#0f0815" />
+
+  <title>Feito com Amor</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/menu.css" />
+</head>
+
+<body class="home">
+
+  <!-- ETAPA 1 — "Feito com Amor" -->
+  <section id="etapa-1" class="etapa etapa--1" aria-label="Abertura">
+    <div class="etapa__conteudo">
+      <h1 class="etapa__titulo" id="titulo-1" aria-live="polite"></h1>
+    </div>
+  </section>
+
+  <!-- ETAPA 2 — Texto de introdução -->
+  <section id="etapa-2" class="etapa etapa--2" aria-label="Introdução">
+    <div class="etapa__conteudo">
+      <h2 class="etapa__olho">Comece por aqui</h2>
+      <div class="introducao" id="introducao-texto" aria-live="polite"></div>
+      <button class="etapa__avancar" id="btn-continuar" type="button" aria-label="Conhecer quem te ama">
+        <span>Conhecer quem te ama</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 4l-1.4 1.4L16.2 11H4v2h12.2l-5.6 5.6L12 20l8-8z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- ETAPA 3 — As três portas -->
+  <section id="etapa-3" class="etapa etapa--3" aria-label="As portas">
+
+    <button class="btn-voltar-intro" id="btn-voltar-intro" type="button" aria-label="Voltar para o começo">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+      </svg>
+      <span>Comece por aqui</span>
+    </button>
+
+    <div class="etapa__conteudo etapa__conteudo--portas">
+      <h2 class="etapa__olho">Abra uma porta</h2>
+      <p class="etapa__subtitulo">Cada porta é um mundo. Você escolhe por onde começar.</p>
+
+      <nav class="portas-grade" aria-label="Mundos">
+        <!-- Mexicana -->
+        <div class="porta-item porta-item--mexicana">
+          <a href="amigos/mexicana/index.html" class="porta-link" aria-label="Entrar no mundo de Mexicana">
+            <div class="porta-visual">
+              <img class="porta-foto" src="assets/images/mexicana.png" alt="" aria-hidden="true" />
+              <svg class="porta-svg" viewBox="0 0 160 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="1" y="1" width="158" height="238" rx="1" stroke="rgba(168,137,198,0.35)" stroke-width="1.5"/>
+                <path d="M16,65 Q16,14 80,14 Q144,14 144,65 L144,228 L16,228 Z" fill="rgba(15,8,21,0.85)" stroke="rgba(168,137,198,0.22)" stroke-width="1"/>
+                <path d="M27,68 Q27,27 80,27 Q133,27 133,68" stroke="rgba(168,137,198,0.15)" stroke-width="1" fill="none"/>
+                <rect x="27" y="74" width="106" height="60" rx="1" stroke="rgba(168,137,198,0.18)" stroke-width="1"/>
+                <rect x="27" y="147" width="106" height="70" rx="1" stroke="rgba(168,137,198,0.18)" stroke-width="1"/>
+                <circle cx="126" cy="184" r="6" fill="rgba(168,137,198,0.55)" stroke="rgba(196,168,224,0.3)" stroke-width="1"/>
+                <rect x="125" y="190" width="2" height="8" rx="1" fill="rgba(168,137,198,0.4)"/>
+              </svg>
+              <div class="porta-entrar" aria-hidden="true">Entrar</div>
+            </div>
+            <div class="porta-info">
+              <span class="porta-numero">01</span>
+              <span class="porta-nome">Mexicana</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Pablo -->
+        <div class="porta-item porta-item--pablo">
+          <a href="amigos/pablo/index.html" class="porta-link" aria-label="Entrar no mundo de Pablo">
+            <div class="porta-visual">
+              <img class="porta-foto" src="assets/images/pablo.png" alt="" aria-hidden="true" />
+              <svg class="porta-svg" viewBox="0 0 160 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="1" y="1" width="158" height="238" rx="1" stroke="rgba(122,95,168,0.35)" stroke-width="1.5"/>
+                <path d="M16,65 Q16,14 80,14 Q144,14 144,65 L144,228 L16,228 Z" fill="rgba(15,8,21,0.85)" stroke="rgba(122,95,168,0.22)" stroke-width="1"/>
+                <path d="M27,68 Q27,27 80,27 Q133,27 133,68" stroke="rgba(122,95,168,0.15)" stroke-width="1" fill="none"/>
+                <rect x="27" y="74" width="106" height="60" rx="1" stroke="rgba(122,95,168,0.18)" stroke-width="1"/>
+                <rect x="27" y="147" width="106" height="70" rx="1" stroke="rgba(122,95,168,0.18)" stroke-width="1"/>
+                <circle cx="126" cy="184" r="6" fill="rgba(122,95,168,0.55)" stroke="rgba(160,140,200,0.3)" stroke-width="1"/>
+                <rect x="125" y="190" width="2" height="8" rx="1" fill="rgba(122,95,168,0.4)"/>
+              </svg>
+              <div class="porta-entrar" aria-hidden="true">Entrar</div>
+            </div>
+            <div class="porta-info">
+              <span class="porta-numero">02</span>
+              <span class="porta-nome">Pablo</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Purple -->
+        <div class="porta-item porta-item--purple">
+          <a href="amigos/purple/index.html" class="porta-link" aria-label="Entrar no mundo de Purple">
+            <div class="porta-visual">
+              <img class="porta-foto" src="assets/images/purple.png" alt="" aria-hidden="true" />
+              <svg class="porta-svg" viewBox="0 0 160 240" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="1" y="1" width="158" height="238" rx="1" stroke="rgba(176,156,208,0.35)" stroke-width="1.5"/>
+                <path d="M16,65 Q16,14 80,14 Q144,14 144,65 L144,228 L16,228 Z" fill="rgba(15,8,21,0.85)" stroke="rgba(176,156,208,0.22)" stroke-width="1"/>
+                <path d="M27,68 Q27,27 80,27 Q133,27 133,68" stroke="rgba(176,156,208,0.15)" stroke-width="1" fill="none"/>
+                <rect x="27" y="74" width="106" height="60" rx="1" stroke="rgba(176,156,208,0.18)" stroke-width="1"/>
+                <rect x="27" y="147" width="106" height="70" rx="1" stroke="rgba(176,156,208,0.18)" stroke-width="1"/>
+                <circle cx="126" cy="184" r="6" fill="rgba(176,156,208,0.55)" stroke="rgba(208,192,232,0.3)" stroke-width="1"/>
+                <rect x="125" y="190" width="2" height="8" rx="1" fill="rgba(176,156,208,0.4)"/>
+              </svg>
+              <div class="porta-entrar" aria-hidden="true">Entrar</div>
+            </div>
+            <div class="porta-info">
+              <span class="porta-numero">03</span>
+              <span class="porta-nome">Purple</span>
+            </div>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Overlay de transição de página -->
+  <div class="transicao-overlay" id="transicao-overlay" aria-hidden="true"></div>
+
+  <script src="js/menu.js" defer></script>
+</body>
+</html>

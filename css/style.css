@@ -1,0 +1,691 @@
+/* ============================================================
+   SISTEMA DE DESIGN — PARA AGATHA
+   Princípio: cada escolha existe pra fazer a leitura demorar
+   o tempo que o sentimento pede.
+   ============================================================ */
+
+/* ---------- Reset gentil ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Suaviza o scroll programático também */
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* ---------- Variáveis (a "alma" visual) ---------- */
+:root {
+  /* Paleta: tinta sobre papel, à noite */
+  --tinta:        #2a211b;     /* Marrom-tinta escuro */
+  --tinta-suave:  #5a4a3e;
+  --papel:        #f4ece0;     /* Papel envelhecido quente */
+  --papel-claro:  #faf5ec;
+  --papel-sombra: #e8dcc4;
+  --dourado:      #b08a4d;     /* Detalhes: vinheta, borda fina */
+  --dourado-claro:#d4b681;
+  --noite:        #14110d;     /* Fundos escuros (abertura, encerramento) */
+  --noite-suave:  #1f1a14;
+  --creme:        #ede4d3;     /* Texto claro sobre noite */
+
+  /* Tipografia */
+  --fonte-serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --fonte-script: 'Dancing Script', 'Brush Script MT', cursive;
+  --fonte-sans:   'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Tamanhos (escala fluida, respira em qualquer tela) */
+  --tamanho-hero:    clamp(2.2rem, 6vw, 4.5rem);
+  --tamanho-titulo:  clamp(1.8rem, 4.5vw, 3rem);
+  --tamanho-texto:   clamp(1.05rem, 1.4vw, 1.2rem);
+  --tamanho-pequeno: clamp(0.85rem, 1.1vw, 0.95rem);
+
+  /* Espaçamento generoso — a respiração do design */
+  --espaco-secao:   clamp(5rem, 12vh, 10rem);
+  --espaco-bloco:   clamp(1.5rem, 3vw, 2.5rem);
+
+  /* Ritmo de movimento */
+  --transicao-lenta: 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  --transicao-media: 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+  --transicao-curta: 0.4s ease;
+}
+
+/* ---------- Base ---------- */
+html, body {
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-texto);
+  line-height: 1.7;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+body.amigo,
+body.home {
+  background: var(--noite);
+  color: var(--creme);
+}
+
+/* Textura sutil de papel em todo o corpo (não é barulhenta) */
+body {
+  background-image:
+    radial-gradient(ellipse at top, rgba(176, 138, 77, 0.04), transparent 60%),
+    radial-gradient(ellipse at bottom, rgba(42, 33, 27, 0.03), transparent 60%);
+  background-attachment: fixed;
+}
+
+/* ---------- Acessibilidade ---------- */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--tinta);
+  color: var(--papel);
+  padding: 0.75rem 1.25rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  z-index: 1000;
+  transition: top var(--transicao-curta);
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Foco visível (teclado) */
+:focus-visible {
+  outline: 2px solid var(--dourado);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   ABERTURA
+   ============================================================ */
+.abertura {
+  position: fixed;
+  inset: 0;
+  background: var(--noite);
+  color: var(--creme);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 100;
+  padding: 2rem;
+  transition: opacity var(--transicao-lenta), visibility var(--transicao-lenta);
+}
+
+.abertura--saindo {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.abertura__conteudo {
+  max-width: 36rem;
+}
+
+.abertura__assinatura {
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.4em;
+  text-transform: lowercase;
+  color: var(--dourado-claro);
+  opacity: 0;
+  animation: aparecer 1.2s ease 0.3s forwards;
+  margin-bottom: 3rem;
+}
+
+.abertura__titulo {
+  font-family: var(--fonte-serif);
+  font-size: var(--tamanho-hero);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  min-height: 2.4em; /* reserva espaço enquanto digita */
+  margin-bottom: 4rem;
+}
+
+/* Cursor piscante do "está sendo digitado" */
+.abertura__titulo::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 0.05em;
+  animation: piscar 1s steps(1) infinite;
+  color: var(--dourado-claro);
+  font-weight: 100;
+}
+
+@keyframes piscar {
+  50% { opacity: 0; }
+}
+
+.abertura__convite {
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.3em;
+  text-transform: lowercase;
+  color: var(--creme);
+  opacity: 0;
+  animation: pulsar 3s ease-in-out infinite;
+}
+
+@keyframes pulsar {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.7; }
+}
+
+@keyframes aparecer {
+  to { opacity: 1; }
+}
+
+@keyframes piscar {
+  50% { opacity: 0; }
+}
+
+/* Quando o conteúdo principal começa a aparecer */
+body.aberto .abertura {
+  position: fixed; /* continua no lugar até o fade terminar */
+}
+
+/* ============================================================
+   SEÇÕES — base comum
+   ============================================================ */
+.secao__cabecalho {
+  text-align: center;
+  margin-bottom: calc(var(--espaco-secao) * 0.7);
+  padding: 0 1.5rem;
+}
+
+.secao__olho {
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.4em;
+  text-transform: lowercase;
+  color: var(--dourado);
+  margin-bottom: 1rem;
+}
+
+.secao__titulo {
+  font-family: var(--fonte-serif);
+  font-size: var(--tamanho-titulo);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--tinta);
+}
+
+/* Estado inicial: invisível até o JS revelar */
+.revelar {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+
+.revelar.revelar--visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   CARTA
+   ============================================================ */
+.carta {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espaco-secao) 1.5rem;
+  background: var(--papel);
+}
+
+.carta__papel {
+  max-width: 38rem;
+  width: 100%;
+  background: var(--papel-claro);
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+  border: 1px solid var(--papel-sombra);
+  border-radius: 2px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 30px 60px -20px rgba(42, 33, 27, 0.15),
+    0 10px 20px -10px rgba(42, 33, 27, 0.1);
+  position: relative;
+}
+
+/* Vinheta nas bordas — amassa a página com suavidade */
+.carta__papel::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(176, 138, 77, 0.25);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+.carta__data {
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.25em;
+  text-transform: lowercase;
+  color: var(--tinta-suave);
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.carta__corpo {
+  font-family: var(--fonte-script);
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  line-height: 1.9;
+  color: var(--tinta);
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.carta__corpo p {
+  margin-bottom: 1.5em;
+  min-height: 1.9em; /* reserva espaço durante a digitação */
+}
+
+/* Cursor piscante na carta também */
+.carta__corpo p.digitando::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 0.05em;
+  animation: piscar 1s steps(1) infinite;
+  color: var(--dourado);
+  font-weight: 300;
+}
+
+.carta__assinatura {
+  font-family: var(--fonte-script);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  color: var(--tinta-suave);
+  text-align: right;
+  font-style: italic;
+}
+
+/* ============================================================
+   LINHA DO TEMPO
+   ============================================================ */
+.linha-do-tempo {
+  padding: var(--espaco-secao) 1.5rem;
+  background: var(--papel-claro);
+  background-image:
+    linear-gradient(to bottom, transparent, rgba(176, 138, 77, 0.03) 50%, transparent);
+}
+
+.memorias {
+  list-style: none;
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-secao);
+}
+
+.memoria {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .memoria {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  .memoria--invertida .memoria__figura {
+    order: 2;
+  }
+  .memoria--invertida .memoria__texto {
+    order: 1;
+    text-align: right;
+  }
+}
+
+/* A moldura: parece polaroid levemente imperfeita */
+.memoria__figura {
+  position: relative;
+  background: #fff;
+  padding: 14px 14px 40px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 20px 40px -15px rgba(42, 33, 27, 0.25);
+  transform: rotate(-1.5deg);
+  transition: transform var(--transicao-media);
+}
+
+.memoria:hover .memoria__figura,
+.memoria:focus-within .memoria__figura {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.memoria--invertida .memoria__figura {
+  transform: rotate(1.5deg);
+}
+
+.memoria__foto,
+.memoria__foto-placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background-color: var(--papel-sombra);
+  display: block;
+}
+
+.memoria__foto-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  color: var(--tinta-suave);
+  letter-spacing: 0.2em;
+  text-transform: lowercase;
+  font-style: italic;
+  background: linear-gradient(135deg, var(--papel-sombra), var(--papel-claro));
+}
+
+.memoria__foto {
+  display: none; /* só aparece quando a imagem carrega */
+}
+
+.memoria__legenda {
+  position: absolute;
+  bottom: 10px;
+  left: 14px;
+  right: 14px;
+  text-align: center;
+  font-family: var(--fonte-script);
+  font-size: 1.1rem;
+  color: var(--tinta-suave);
+}
+
+.memoria__data {
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.3em;
+  text-transform: lowercase;
+  color: var(--dourado);
+  margin-bottom: 0.75rem;
+}
+
+.memoria__titulo {
+  font-family: var(--fonte-serif);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--tinta);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.memoria__descricao {
+  font-size: var(--tamanho-texto);
+  color: var(--tinta-suave);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   GALERIA — espalhada como num caderno
+   ============================================================ */
+.galeria {
+  padding: var(--espaco-secao) 1.5rem;
+  background: var(--papel);
+  position: relative;
+  overflow: hidden;
+}
+
+.galeria__grade {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .galeria__grade {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .galeria__grade {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+.galeria__item {
+  position: relative;
+  background: #fff;
+  padding: 10px 10px 32px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 15px 30px -12px rgba(42, 33, 27, 0.2);
+  transition: transform var(--transicao-media), z-index 0s;
+  z-index: 1;
+}
+
+/* Rotações imperfeitas, como alguém colou à mão */
+.galeria__item--1 { transform: rotate(-2.5deg); }
+.galeria__item--2 { transform: rotate(1.8deg) translateY(20px); }
+.galeria__item--3 { transform: rotate(-1deg); }
+.galeria__item--4 { transform: rotate(2.2deg) translateY(-15px); }
+.galeria__item--5 { transform: rotate(-1.8deg) translateY(10px); }
+
+.galeria__item:hover {
+  transform: rotate(0deg) scale(1.04) translateY(0);
+  z-index: 10;
+}
+
+.galeria__foto,
+.galeria__placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background-color: var(--papel-sombra);
+  display: block;
+}
+
+.galeria__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--papel-sombra), var(--papel-claro));
+}
+
+.galeria__foto {
+  display: none;
+}
+
+.galeria__legenda {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+  font-family: var(--fonte-script);
+  font-size: 1rem;
+  color: var(--tinta-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================
+   ENCERRAMENTO
+   ============================================================ */
+.encerramento {
+  min-height: 100vh;
+  background: var(--noite);
+  color: var(--creme);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--espaco-secao) 1.5rem;
+  text-align: center;
+  position: relative;
+}
+
+/* Vinheta de luz suave no centro, como um foco de vela */
+.encerramento::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(176, 138, 77, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.encerramento__foto-grupo {
+  max-width: 26rem;
+  width: 100%;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.encerramento__foto,
+.encerramento__placeholder {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--noite-suave);
+  border: 1px solid rgba(176, 138, 77, 0.3);
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.5);
+}
+
+.encerramento__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  color: var(--dourado-claro);
+  letter-spacing: 0.3em;
+  text-transform: lowercase;
+  font-style: italic;
+}
+
+.encerramento__foto {
+  display: none;
+}
+
+.encerramento__frase {
+  font-family: var(--fonte-serif);
+  font-size: var(--tamanho-titulo);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.4;
+  max-width: 32rem;
+  margin-bottom: 4rem;
+  position: relative;
+  z-index: 1;
+  min-height: 2em;
+}
+
+.encerramento__frase::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 0.05em;
+  animation: piscar 1s steps(1) infinite;
+  color: var(--dourado-claro);
+}
+
+.encerramento__rodape {
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.2em;
+  text-transform: lowercase;
+  color: var(--dourado-claro);
+  opacity: 0.7;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   PLAYER DE ÁUDIO — canto inferior direito, discreto
+   ============================================================ */
+.player {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+}
+
+.player__botao {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1rem;
+  background: rgba(20, 17, 13, 0.85);
+  color: var(--creme);
+  border: 1px solid rgba(176, 138, 77, 0.3);
+  border-radius: 100px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.15em;
+  text-transform: lowercase;
+  transition: background var(--transicao-curta), border-color var(--transicao-curta), transform var(--transicao-curta);
+}
+
+.player__botao:hover {
+  background: rgba(20, 17, 13, 0.95);
+  border-color: var(--dourado-claro);
+  transform: translateY(-2px);
+}
+
+.player__icone {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.player__icone--pause { display: none; }
+
+.player.tocando .player__icone--play  { display: none; }
+.player.tocando .player__icone--pause { display: block; }
+
+.player__rotulo {
+  font-family: var(--fonte-sans);
+}
+
+@media (max-width: 480px) {
+  .player__rotulo { display: none; }
+  .player__botao { padding: 0.7rem; }
+}

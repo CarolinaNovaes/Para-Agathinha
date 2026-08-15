@@ -1,0 +1,689 @@
+/* ============================================================
+   PÁGINAS DE AMIGO — Retrospectiva (v2)
+   Primeira dobra: "Para você de: Nome"
+   Sem traços. Acentos roxos. "Que me lembram você".
+   ============================================================ */
+
+:root {
+  /* Cor de destaque do amigo (sobrescrita por página) */
+  --amigo-cor:        #a889c6;
+  --amigo-cor-clara:  #c4a8e0;
+  --amigo-cor-fundo:  #1a0f1f;
+}
+
+body.amigo {
+  background: #0f0815;
+  color: var(--creme);
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   PRIMEIRA DOBRA — "Para você de: [Nome]"
+   Substitui o hero grandão antigo
+   ============================================================ */
+.amigo-hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.amigo-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top, var(--amigo-cor) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, var(--amigo-cor-fundo) 0%, transparent 60%),
+    #0f0815;
+  opacity: 0.7;
+  z-index: 0;
+}
+
+.amigo-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 4px 4px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.amigo-hero__conteudo {
+  position: relative;
+  z-index: 2;
+  max-width: 50rem;
+}
+
+.amigo-hero__de {
+  font-family: var(--fonte-sans);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  color: var(--amigo-cor-clara);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.3s forwards;
+}
+
+.amigo-hero__de strong {
+  color: var(--creme);
+  font-weight: 400;
+}
+
+.amigo-hero__para {
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--amigo-cor-clara);
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  opacity: 0;
+  animation: fadeIn 1s ease 0.3s forwards;
+}
+
+.amigo-hero__nome {
+  font-family: var(--fonte-serif);
+  font-size: clamp(3.5rem, 14vw, 9rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(180deg, var(--creme) 0%, var(--amigo-cor-clara) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0;
+  animation: heroEntrada 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) 0.6s forwards;
+}
+
+.amigo-hero__subtitulo {
+  font-family: var(--fonte-serif);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--creme);
+  opacity: 0;
+  max-width: 32rem;
+  margin: 0 auto;
+  animation: fadeIn 1s ease 1.4s forwards;
+}
+
+.amigo-hero__seta {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: var(--amigo-cor-clara);
+  opacity: 0;
+  animation: fadeIn 1s ease 2s forwards, bounce 2.5s ease-in-out 2.5s infinite;
+}
+
+.amigo-hero__seta svg { width: 28px; height: 28px; }
+
+@keyframes heroEntrada {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%      { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ============================================================
+   SEÇÕES — sem traços, só respiro entre elas
+   ============================================================ */
+.amigo-secao {
+  padding: var(--espaco-secao) 1.5rem;
+  position: relative;
+}
+
+.amigo-secao--escura { background: #0f0815; }
+.amigo-secao--clara  { background: var(--amigo-cor-fundo); }
+
+.amigo-secao__cabecalho {
+  text-align: center;
+  max-width: 50rem;
+  margin: 0 auto var(--espaco-secao) auto;
+}
+
+.amigo-secao__olho {
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.4em;
+  text-transform: lowercase;
+  color: var(--amigo-cor-clara);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.amigo-secao__titulo {
+  font-family: var(--fonte-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.1;
+  color: var(--creme);
+  margin-bottom: 1rem;
+}
+
+.amigo-secao__subtitulo {
+  font-size: var(--tamanho-texto);
+  color: var(--creme);
+  opacity: 0.7;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   CONTADOR GIGANTE
+   ============================================================ */
+.contador-wrapped {
+  text-align: center;
+  padding: var(--espaco-secao) 1.5rem;
+  background: linear-gradient(
+    180deg,
+    #0f0815 0%,
+    var(--amigo-cor-fundo) 50%,
+    #0f0815 100%
+  );
+}
+
+.contador-wrapped__numero {
+  font-family: var(--fonte-serif);
+  font-size: clamp(5rem, 18vw, 12rem);
+  font-weight: 400;
+  line-height: 1;
+  background: linear-gradient(
+    180deg,
+    var(--amigo-cor-clara) 0%,
+    var(--amigo-cor) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.04em;
+}
+
+.contador-wrapped__rotulo {
+  font-family: var(--fonte-sans);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  color: var(--creme);
+  max-width: 30rem;
+  margin: 0 auto;
+  line-height: 1.4;
+}
+
+.contador-wrapped__rotulo strong {
+  color: var(--amigo-cor-clara);
+  font-weight: 500;
+}
+
+/* ============================================================
+   TOP 5 — "Que me lembram você"
+   ============================================================ */
+.top-musicas {
+  max-width: 56rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.top-musica {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.75rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.top-musica--visivel {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.top-musica:hover {
+  background: rgba(168, 137, 198, 0.1);
+  transform: translateX(8px);
+  border-color: var(--amigo-cor);
+}
+
+.top-musica__rank {
+  font-family: var(--fonte-serif);
+  font-size: 2.5rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--amigo-cor-clara);
+  line-height: 1;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.top-musica__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.top-musica__titulo {
+  font-family: var(--fonte-sans);
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--creme);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-musica__artista {
+  font-family: var(--fonte-sans);
+  font-size: 0.9rem;
+  color: var(--creme);
+  opacity: 0.6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Botao Spotify em cada musica */
+.top-musica__spotify {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.top-musica__spotify svg {
+  width: 20px;
+  height: 20px;
+}
+
+.top-musica__spotify:hover {
+  color: #1db954;
+  transform: scale(1.15);
+}
+
+/* ============================================================
+   PLAYLIST SPOTIFY
+   ============================================================ */
+.playlist-spotify {
+  max-width: 56rem;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.5);
+}
+
+.playlist-spotify iframe {
+  display: block;
+  width: 100%;
+  height: 480px;
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .playlist-spotify iframe { height: 600px; }
+}
+
+/* ============================================================
+   CARTA
+   ============================================================ */
+.amigo-carta {
+  max-width: 38rem;
+  margin: 0 auto;
+  background: var(--papel-claro);
+  color: var(--tinta);
+  padding: clamp(2.5rem, 6vw, 5rem) clamp(2rem, 5vw, 4rem);
+  border-radius: 2px;
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.4),
+    0 10px 20px -10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.amigo-carta::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(168, 137, 198, 0.3);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+.amigo-carta__corpo {
+  font-family: var(--fonte-script);
+  font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+  line-height: 1.9;
+  margin-bottom: 2.5rem;
+}
+
+.amigo-carta__corpo p { margin-bottom: 1.5em; }
+.amigo-carta__corpo p:last-child { margin-bottom: 0; }
+
+.amigo-carta__assinatura {
+  font-family: var(--fonte-script);
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  color: var(--tinta-suave);
+  text-align: right;
+  font-style: italic;
+}
+
+/* ============================================================
+   GALERIA
+   ============================================================ */
+.amigo-galeria {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .amigo-galeria {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+.amigo-foto {
+  position: relative;
+  background: #fff;
+  padding: 12px 12px 36px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 15px 30px -12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.5s ease;
+  border-radius: 2px;
+}
+
+.amigo-foto:nth-child(odd)  { transform: rotate(-1.8deg); }
+.amigo-foto:nth-child(even) { transform: rotate(1.5deg); }
+.amigo-foto:nth-child(3n)   { transform: rotate(-0.8deg) translateY(15px); }
+
+.amigo-foto:hover {
+  transform: rotate(0) scale(1.04) translateY(0);
+  z-index: 10;
+}
+
+.amigo-foto__img,
+.amigo-foto__placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  background: linear-gradient(135deg, var(--papel-sombra), var(--papel-claro));
+  display: block;
+}
+
+.amigo-foto__placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fonte-sans);
+  font-size: 0.85rem;
+  color: var(--tinta-suave);
+  letter-spacing: 0.2em;
+  text-transform: lowercase;
+}
+
+.amigo-foto__legenda {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  right: 12px;
+  text-align: center;
+  font-family: var(--fonte-script);
+  font-size: 1rem;
+  color: var(--tinta-suave);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================================
+   VÍDEOS
+   ============================================================ */
+.amigo-videos {
+  max-width: 56rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.amigo-video {
+  position: relative;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
+}
+
+/* YouTube/iframe: mantém aspecto 16:9 */
+.amigo-video iframe {
+  width: 100%;
+  display: block;
+  height: 480px;
+  border: 0;
+}
+
+/* Vídeos nativos (mp4): altura automática pra respeitar orientacao */
+.amigo-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  max-height: 80vh;
+}
+
+.amigo-video__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, var(--noite-suave), var(--amigo-cor-fundo));
+  color: var(--amigo-cor-clara);
+  font-family: var(--fonte-sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.2em;
+  text-transform: lowercase;
+}
+
+.amigo-video__legenda {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 1.5rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: var(--creme);
+  font-family: var(--fonte-sans);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* ============================================================
+   MOMENTOS MARCANTES
+   ============================================================ */
+.momentos-grid {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 700px)  { .momentos-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .momentos-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.momento-card {
+  position: relative;
+  padding: 2.5rem 2rem;
+  border-radius: 8px;
+  min-height: 16rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--amigo-cor) 0%, var(--amigo-cor-fundo) 100%);
+  box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.momento-card--visivel { opacity: 1; transform: translateY(0); }
+
+.momento-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.4);
+}
+
+.momento-card:nth-child(2) { background: linear-gradient(135deg, #7a4d6b 0%, #2a141f 100%); }
+.momento-card:nth-child(3) { background: linear-gradient(135deg, #b85a8a 0%, #4a1f3a 100%); }
+.momento-card:nth-child(4) { background: linear-gradient(135deg, #d977a8 0%, #1f0a14 100%); }
+.momento-card:nth-child(5) { background: linear-gradient(135deg, #8a4a6b 0%, #2a141f 100%); }
+.momento-card:nth-child(6) { background: linear-gradient(135deg, #c4648a 0%, #3a1f2a 100%); }
+
+.momento-card__data {
+  font-family: var(--fonte-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--amigo-cor-clara);
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  opacity: 0.85;
+}
+
+.momento-card__titulo {
+  font-family: var(--fonte-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--creme);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.momento-card__desc {
+  font-family: var(--fonte-sans);
+  font-size: 0.95rem;
+  color: var(--creme);
+  opacity: 0.85;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   ENCERRAMENTO
+   ============================================================ */
+.amigo-encerramento {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--espaco-secao) 1.5rem;
+  background: #0f0815;
+  position: relative;
+}
+
+.amigo-encerramento::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, var(--amigo-cor-fundo) 0%, transparent 70%);
+  opacity: 0.5;
+}
+
+.amigo-encerramento__frase {
+  font-family: var(--fonte-serif);
+  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.3;
+  max-width: 38rem;
+  color: var(--creme);
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.amigo-encerramento__voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.75rem;
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.25em;
+  text-transform: lowercase;
+  color: var(--amigo-cor-clara);
+  border: 1px solid rgba(168, 137, 198, 0.3);
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.amigo-encerramento__voltar:hover {
+  background: rgba(168, 137, 198, 0.1);
+  border-color: var(--amigo-cor-clara);
+}
+
+.amigo-encerramento__voltar svg { width: 14px; height: 14px; }
+
+/* ============================================================
+   REVELAÇÃO POR SCROLL
+   ============================================================ */
+.revelar {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+}
+.revelar--visivel { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .revelar, .momento-card, .top-musica {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

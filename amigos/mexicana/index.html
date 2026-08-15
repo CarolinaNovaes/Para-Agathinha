@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Mexicana — um mundo só dela, pra Agatha." />
+  <meta name="theme-color" content="#2a1525" />
+
+  <title>Mexicana, pra Agatha</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/amigo.css" />
+  <link rel="stylesheet" href="../../css/quadrinho.css" />
+
+  <style>
+    :root {
+      --amigo-cor:       #c08ad0;
+      --amigo-cor-clara: #d8b0e0;
+      --amigo-cor-fundo: #2a1525;
+    }
+  </style>
+</head>
+
+<body class="amigo" data-amigo="mexicana">
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="amigo-hero">
+    <div class="amigo-hero__conteudo">
+      <p class="amigo-hero__para">Para você, de:</p>
+      <h1 class="amigo-hero__nome">Mexicana</h1>
+      <p class="amigo-hero__subtitulo">
+        Tudo que eu quis te dizer, mas que às vezes a vida não dá tempo. Então coloquei aqui.
+      </p>
+    </div>
+    <div class="amigo-hero__seta" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" fill="currentColor"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================
+       QUADRINHO
+       ============================================ -->
+  <section class="amigo-secao amigo-secao--escura">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">em quadrinhos</p>
+      <h2 class="amigo-secao__titulo">A história</h2>
+      <p class="amigo-secao__subtitulo">Clique nas páginas para virar. Use as setas ou deslize no celular.</p>
+    </header>
+
+    <div class="livro-container revelar">
+      <div class="livro" id="livro" role="region" aria-label="História em quadrinhos">
+        <div class="pagina pagina--ativa" data-index="0">
+          <img src="../../assets/quadrinho/capa.png" alt="Capa da história" />
+        </div>
+        <div class="pagina" data-index="1">
+          <img src="../../assets/quadrinho/cap1.png" alt="Capítulo 1" />
+        </div>
+        <div class="pagina" data-index="2">
+          <img src="../../assets/quadrinho/cap2.png" alt="Capítulo 2" />
+        </div>
+        <div class="pagina" data-index="3">
+          <img src="../../assets/quadrinho/cap3.png" alt="Capítulo 3" />
+        </div>
+        <div class="pagina" data-index="4">
+          <img src="../../assets/quadrinho/cap-final.png" alt="Capítulo final" />
+        </div>
+        <span class="livro-dica" aria-hidden="true">clique para virar</span>
+      </div>
+
+      <div class="livro-nav" role="navigation" aria-label="Navegação do quadrinho">
+        <button class="livro-btn livro-prev" id="livro-prev" type="button" aria-label="Página anterior" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+          </svg>
+        </button>
+        <span class="livro-contador" id="livro-contador" aria-live="polite">1 / 5</span>
+        <button class="livro-btn livro-next" id="livro-next" type="button" aria-label="Próxima página">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       MUSICAS
+       ============================================ -->
+  <section class="amigo-secao amigo-secao--clara">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">que me lembram você</p>
+      <h2 class="amigo-secao__titulo">As cinco músicas</h2>
+      <p class="amigo-secao__subtitulo">
+        As que tocaram mais quando eu pensava em você. Clique no ícone verde para ouvir no Spotify.
+      </p>
+    </header>
+
+    <ol class="top-musicas" role="list">
+      <li class="top-musica">
+        <span class="top-musica__rank">1</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">Linha do Equador</span>
+          <span class="top-musica__artista">Djavan</span>
+        </div>
+        <a class="top-musica__spotify" href="https://open.spotify.com/search/Linha%20do%20Equador%20Djavan" target="_blank" rel="noopener noreferrer" aria-label="Ouvir no Spotify">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="currentColor"/></svg>
+        </a>
+      </li>
+
+      <li class="top-musica">
+        <span class="top-musica__rank">2</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">Ter o coração no chão</span>
+          <span class="top-musica__artista">Anavitória</span>
+        </div>
+        <a class="top-musica__spotify" href="https://open.spotify.com/search/Ter%20o%20cora%C3%A7%C3%A3o%20no%20ch%C3%A3o%20Anavit%C3%B3ria" target="_blank" rel="noopener noreferrer" aria-label="Ouvir no Spotify">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="currentColor"/></svg>
+        </a>
+      </li>
+
+      <li class="top-musica">
+        <span class="top-musica__rank">3</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">Trela</span>
+          <span class="top-musica__artista">O Grilo</span>
+        </div>
+        <a class="top-musica__spotify" href="https://open.spotify.com/search/Trela%20O%20Grilo" target="_blank" rel="noopener noreferrer" aria-label="Ouvir no Spotify">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="currentColor"/></svg>
+        </a>
+      </li>
+
+      <li class="top-musica">
+        <span class="top-musica__rank">4</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">The Apparition</span>
+          <span class="top-musica__artista">Sleep Token</span>
+        </div>
+        <a class="top-musica__spotify" href="https://open.spotify.com/search/The%20Apparition%20Sleep%20Token" target="_blank" rel="noopener noreferrer" aria-label="Ouvir no Spotify">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="currentColor"/></svg>
+        </a>
+      </li>
+
+      <li class="top-musica">
+        <span class="top-musica__rank">5</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">Alkaline</span>
+          <span class="top-musica__artista">Sleep Token</span>
+        </div>
+        <a class="top-musica__spotify" href="https://open.spotify.com/search/Alkaline%20Sleep%20Token" target="_blank" rel="noopener noreferrer" aria-label="Ouvir no Spotify">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" fill="currentColor"/></svg>
+        </a>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ============================================
+       PLAYLIST
+       ============================================ -->
+  <section class="amigo-secao amigo-secao--escura">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">pra ouvir junto</p>
+      <h2 class="amigo-secao__titulo">A playlist</h2>
+      <p class="amigo-secao__subtitulo">
+        As músicas que montei pensando em você. Toca quando quiser lembrar da gente.
+      </p>
+    </header>
+
+    <div class="playlist-spotify revelar">
+      <!--
+        Troque o src pelo link da sua playlist:
+        Spotify > playlist > ... > Compartilhar > Incorporar playlist > copie o src do iframe
+      -->
+      <iframe
+        src="https://open.spotify.com/embed/playlist/4hFuksVBjHu20vy7docNFd?utm_source=generator&theme=0"
+        width="100%"
+        height="480"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        title="Playlist pra Agatha">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CARTA
+       ============================================ -->
+  <section class="amigo-secao amigo-secao--clara">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">de coração</p>
+      <h2 class="amigo-secao__titulo">A carta</h2>
+    </header>
+
+    <article class="amigo-carta revelar">
+      <div class="amigo-carta__corpo">
+        <p>Hoje é o teu dia.</p>
+        <p>E eu fiquei pensando em como começar essa carta sem cair no óbvio. Porque dizer que você é importante parece pequeno demais perto do espaço que você ocupa na minha vida.</p>
+        <p>Você me ensinou que amor também mora nas miudezas. Mora na foto do look perguntando "assim tá bom?", no áudio aleatório reclamando de alguma coisa, nos itens que você manda da nossa casita imaginária, nas cinco horas de live, nas conversas sobre gatos, filmes, sonhos e na nossa inexplicável tradição de olhar o relógio às 11:11.</p>
+        <p>Obrigada por ser meu lugar seguro tantas vezes.</p>
+        <p>Você talvez nunca perceba o quanto mudou a Carolina. Hoje eu falo dos meus medos, dos meus planos, do meu trabalho e das minhas ideias com uma naturalidade que eu nunca tive antes. Isso aconteceu porque, em algum momento, você fez parecer seguro existir exatamente como eu sou.</p>
+        <p>Eu espero que esse novo ano da sua vida seja gentil com você. Que a faculdade finalmente respire, que os sonhos encontrem caminhos bonitos, que você ria até perder o ar nas nossas partidas e que nunca lhe faltem pessoas que te amem do jeitinho que você merece.</p>
+        <p>E, egoisticamente, espero continuar vivendo um montão de memórias ao teu lado. Ainda temos uma casinha pra mobiliar, gatos pra adotar, filmes pra discutir, piadas internas pra criar e muitos "uaus" e "uauzinhos" pela frente.</p>
+        <p>Feliz aniversário, meu amorzinho.</p>
+      </div>
+      <p class="amigo-carta__assinatura">Com todo o carinho do mundo, Sua Mexinha. 🌷</p>
+    </article>
+  </section>
+
+  <!-- ============================================
+       ENCERRAMENTO
+       ============================================ -->
+  <section class="amigo-encerramento">
+    <p class="amigo-encerramento__frase revelar">
+      Se a Agatha perguntar um dia por que você é importante, espero que ela volte aqui e leia tudo de novo.
+    </p>
+    <a href="../../index.html#portas" class="amigo-encerramento__voltar">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 20l1.4-1.4L7.8 13H20v-2H7.8l5.6-5.6L12 4l-8 8z" fill="currentColor"/>
+      </svg>
+      <span>Voltar às portas</span>
+    </a>
+  </section>
+
+  <script src="../../js/amigo.js" defer></script>
+  <script src="../../js/quadrinho.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Pablo — um pedaço de você, pra Agatha." />
+  <meta name="theme-color" content="#15102a" />
+
+  <title>Pablo, pra Agatha</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/amigo.css" />
+
+  <style>
+    :root {
+      --amigo-cor:       #7a5fa8;
+      --amigo-cor-clara: #a08cc8;
+      --amigo-cor-fundo: #15102a;
+    }
+  </style>
+</head>
+
+<body class="amigo" data-amigo="pablo">
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <section class="amigo-hero">
+    <div class="amigo-hero__conteudo">
+      <p class="amigo-hero__para">Para você, de:</p>
+      <h1 class="amigo-hero__nome">Pablo</h1>
+      <p class="amigo-hero__subtitulo">
+        Tudo que eu quis te dizer, mas que às vezes a vida não dá tempo. Então coloquei aqui.
+      </p>
+    </div>
+    <div class="amigo-hero__seta" aria-hidden="true">
+      <svg viewBox="0 0 24 24">
+        <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" fill="currentColor"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VIDEO
+       ============================================ -->
+  <section class="amigo-secao amigo-secao--escura">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">em movimento</p>
+      <h2 class="amigo-secao__titulo">Uma mensagem</h2>
+    </header>
+
+    <div class="amigo-videos revelar">
+      <div class="amigo-video">
+        <video
+          src="../../assets/videos/pablo.mp4"
+          controls
+          preload="metadata"
+          playsinline
+          aria-label="Mensagem de Pablo para Agatha">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       EM BREVE
+       ============================================ -->
+  <section class="amigo-secao amigo-secao--clara">
+    <div class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">mais por vir</p>
+      <h2 class="amigo-secao__titulo">Tem mais chegando</h2>
+      <p class="amigo-secao__subtitulo">Músicas e carta a caminho. Ainda tem muito amor pra colocar aqui.</p>
+    </div>
+  </section>
+
+  <!-- ============================================
+       ENCERRAMENTO
+       ============================================ -->
+  <section class="amigo-encerramento">
+    <p class="amigo-encerramento__frase revelar">
+      Que bom que você abriu essa porta. Tem mais gente aqui que te ama.
+    </p>
+    <a href="../../index.html#portas" class="amigo-encerramento__voltar">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 20l1.4-1.4L7.8 13H20v-2H7.8l5.6-5.6L12 4l-8 8z" fill="currentColor"/>
+      </svg>
+      <span>Voltar às portas</span>
+    </a>
+  </section>
+
+  <script src="../../js/amigo.js" defer></script>
+</body>
+</html>

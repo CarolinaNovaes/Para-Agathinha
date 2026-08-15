@@ -1,0 +1,449 @@
+/* ============================================================
+   MENU — Feito com Amor
+   Portas reais. Animacoes fluidas. Roxo como alma.
+   ============================================================ */
+
+:root {
+  --roxo:        #a889c6;
+  --roxo-claro:  #c4a8e0;
+  --roxo-escuro: #6b4d8a;
+  --roxo-fundo:  #1a0f1f;
+  --roxo-noite:  #0f0815;
+}
+
+/* ---------- Body home ---------- */
+body.home {
+  background: var(--roxo-noite);
+  color: var(--creme);
+  overflow: hidden;
+  height: 100vh;
+}
+
+body.home.etapa-livre {
+  overflow-y: auto;
+  height: auto;
+}
+
+/* ---------- Etapas ---------- */
+.etapa {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 1.2s ease, visibility 1.2s ease, transform 1.2s ease;
+  z-index: 1;
+}
+
+.etapa--ativa {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 5;
+}
+
+.etapa--saindo {
+  opacity: 0;
+  transform: translateY(-24px);
+}
+
+.etapa__conteudo {
+  max-width: 70rem;
+  width: 100%;
+  text-align: center;
+}
+
+/* ---------- ETAPA 1 — "Feito com Amor" ---------- */
+.etapa--1 {
+  background: radial-gradient(ellipse at center, rgba(168,137,198,0.18), transparent 60%),
+              var(--roxo-noite);
+}
+
+.etapa__titulo {
+  font-family: var(--fonte-serif);
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  color: var(--creme);
+  min-height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.etapa__titulo::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 0.1em;
+  color: var(--roxo-claro);
+  animation: piscar 1s steps(1) infinite;
+}
+
+.etapa__titulo.sem-cursor::after {
+  display: none;
+}
+
+/* ---------- ETAPA 2 — Introducao ---------- */
+.etapa--2 {
+  background: radial-gradient(ellipse at top, rgba(168,137,198,0.1), transparent 60%),
+              var(--roxo-noite);
+  align-items: flex-start;
+  padding-top: 12vh;
+}
+
+.etapa__olho {
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.5em;
+  color: var(--roxo-claro);
+  margin-bottom: 3rem;
+  font-weight: 400;
+}
+
+.introducao {
+  font-family: var(--fonte-serif);
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  line-height: 1.9;
+  color: var(--creme);
+  max-width: 38rem;
+  margin: 0 auto 3.5rem;
+  text-align: left;
+  min-height: 8em;
+  font-weight: 300;
+  font-style: italic;
+  opacity: 0.92;
+}
+
+.introducao p { margin-bottom: 1em; }
+.introducao p:last-child { margin-bottom: 0; }
+
+.introducao p.digitando::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 0.05em;
+  animation: piscar 1s steps(1) infinite;
+  color: var(--roxo-claro);
+}
+
+.etapa__avancar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  font-family: var(--fonte-sans);
+  font-size: var(--tamanho-pequeno);
+  letter-spacing: 0.25em;
+  color: var(--roxo-claro);
+  border: 1px solid rgba(168,137,198,0.4);
+  border-radius: 100px;
+  background: transparent;
+  transition: all var(--transicao-media);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+}
+
+.etapa__avancar--visivel {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.etapa__avancar:hover {
+  background: rgba(168,137,198,0.12);
+  border-color: var(--roxo-claro);
+  color: var(--creme);
+  transform: translateY(-2px);
+}
+
+.etapa__avancar svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--transicao-curta);
+}
+
+.etapa__avancar:hover svg {
+  transform: translateX(4px);
+}
+
+/* ---------- ETAPA 3 — Portas ---------- */
+.etapa--3 {
+  background: var(--roxo-noite);
+  align-items: flex-start;
+  padding-top: 6vh;
+  padding-bottom: 5vh;
+  overflow-y: auto;
+}
+
+.etapa__conteudo--portas {
+  max-width: 72rem;
+}
+
+.etapa__subtitulo {
+  font-family: var(--fonte-serif);
+  font-style: italic;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  color: var(--creme);
+  opacity: 0.55;
+  margin-top: -1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Botao voltar ao inicio (canto sup esquerdo) */
+.btn-voltar-intro {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1rem;
+  font-family: var(--fonte-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.2em;
+  color: rgba(196,168,224,0.7);
+  border: 1px solid rgba(168,137,198,0.2);
+  border-radius: 100px;
+  background: rgba(15,8,21,0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: all var(--transicao-curta);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-voltar-intro.visivel {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.btn-voltar-intro:hover {
+  color: var(--creme);
+  border-color: rgba(168,137,198,0.5);
+  background: rgba(168,137,198,0.1);
+}
+
+.btn-voltar-intro svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================================
+   GRADE DE PORTAS
+   ============================================================ */
+.portas-grade {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+@media (max-width: 700px) {
+  .portas-grade {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 700px) and (max-width: 960px) {
+  .portas-grade {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* ---------- Cada porta ---------- */
+.porta-item {
+  opacity: 0;
+  transform: translateY(40px) scale(0.96);
+  transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.porta-item--visivel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.porta-link {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: var(--creme);
+}
+
+/* Wrapper visual da porta */
+.porta-visual {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  border-radius: 3px 3px 0 0;
+  cursor: pointer;
+  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.5s ease;
+}
+
+.porta-item--mexicana .porta-visual { box-shadow: 0 0 0 1px rgba(168,137,198,0.25); }
+.porta-item--pablo    .porta-visual { box-shadow: 0 0 0 1px rgba(122,95,168,0.25); }
+.porta-item--purple   .porta-visual { box-shadow: 0 0 0 1px rgba(176,156,208,0.25); }
+
+.porta-link:hover .porta-visual {
+  transform: translateY(-8px);
+}
+
+.porta-item--mexicana .porta-link:hover .porta-visual {
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6),
+              0 0 60px -10px rgba(168,137,198,0.35),
+              0 0 0 1px rgba(168,137,198,0.5);
+}
+.porta-item--pablo .porta-link:hover .porta-visual {
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6),
+              0 0 60px -10px rgba(122,95,168,0.35),
+              0 0 0 1px rgba(122,95,168,0.5);
+}
+.porta-item--purple .porta-link:hover .porta-visual {
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6),
+              0 0 60px -10px rgba(176,156,208,0.35),
+              0 0 0 1px rgba(176,156,208,0.5);
+}
+
+/* Foto da pessoa: fundo, revelada no hover */
+.porta-foto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+  z-index: 0;
+}
+
+.porta-link:hover .porta-foto {
+  opacity: 0.55;
+  transform: scale(1);
+}
+
+/* SVG da porta (sempre visivel, na frente) */
+.porta-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  transition: opacity 0.5s ease;
+}
+
+.porta-link:hover .porta-svg {
+  opacity: 0.6;
+}
+
+/* "Entrar" que aparece no hover */
+.porta-entrar {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  z-index: 2;
+  font-family: var(--fonte-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  color: var(--creme);
+  opacity: 0;
+  transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+  white-space: nowrap;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 100px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  background: rgba(15,8,21,0.4);
+}
+
+.porta-link:hover .porta-entrar {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Info abaixo da porta */
+.porta-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.85rem 0.2rem 0;
+  border-top: 1px solid rgba(168,137,198,0.15);
+  transition: border-color 0.4s ease;
+}
+
+.porta-item--mexicana .porta-link:hover .porta-info { border-color: rgba(168,137,198,0.4); }
+.porta-item--pablo    .porta-link:hover .porta-info { border-color: rgba(122,95,168,0.4); }
+.porta-item--purple   .porta-link:hover .porta-info { border-color: rgba(176,156,208,0.4); }
+
+.porta-numero {
+  font-family: var(--fonte-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  font-weight: 500;
+  color: var(--roxo-claro);
+  opacity: 0.6;
+}
+
+.porta-nome {
+  font-family: var(--fonte-serif);
+  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+  font-weight: 400;
+  font-style: italic;
+  background: linear-gradient(180deg, var(--creme), var(--roxo-claro));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background 0.4s ease;
+}
+
+/* Scrollbar discreta */
+.etapa--3::-webkit-scrollbar { width: 4px; }
+.etapa--3::-webkit-scrollbar-track { background: transparent; }
+.etapa--3::-webkit-scrollbar-thumb { background: rgba(168,137,198,0.25); border-radius: 2px; }
+.etapa--3::-webkit-scrollbar-thumb:hover { background: var(--roxo-claro); }
+
+/* ============================================================
+   OVERLAY DE TRANSICAO DE PAGINA
+   ============================================================ */
+.transicao-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--roxo-noite);
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.transicao-overlay--ativa {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================================================
+   ANIMACOES
+   ============================================================ */
+@keyframes piscar {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

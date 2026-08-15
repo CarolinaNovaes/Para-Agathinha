@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Para Vinicius — um pedaço de você, pra Agatha." />
+  <meta name="theme-color" content="#8e6cb8" />
+
+  <title>Para Vinicius</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="../../css/style.css" />
+  <link rel="stylesheet" href="../../css/amigo.css" />
+  <style>
+    /* Vinicius — roxo com toque de vinho, caloroso */
+    :root {
+      --amigo-cor:        #8e6cb8;
+      --amigo-cor-clara:  #b298d0;
+      --amigo-cor-fundo:  #1f0f1a;
+    }
+  </style>
+</head>
+
+<body class="amigo" data-amigo="vinicius">
+
+  <section class="amigo-hero">
+    <div class="amigo-hero__conteudo">
+      <p class="amigo-hero__para">Para você, de:</p>
+      <h1 class="amigo-hero__nome">Vinicius</h1>
+      <p class="amigo-hero__subtitulo">
+        Tudo que eu quis te dizer, mas que às vezes a vida não dá tempo. Então coloquei aqui.
+      </p>
+    </div>
+    <div class="amigo-hero__seta" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 4l-1.4 1.4L16.2 11H4v2h12.2l-5.6 5.6L12 20l8-8z" fill="currentColor"/></svg>
+    </div>
+  </section>
+
+  <section class="contador-wrapped revelar">
+    <p class="contador-wrapped__numero" data-contador="673" data-duracao="2200">0</p>
+    <p class="contador-wrapped__rotulo">
+      Vezes que eu pensei <strong>"ainda bem que ele existe"</strong> e fiquei em paz
+    </p>
+  </section>
+
+  <section class="amigo-secao amigo-secao--escura">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">que ficaram</p>
+      <h2 class="amigo-secao__titulo">Momentos que eu não esqueço</h2>
+      <p class="amigo-secao__subtitulo">
+        Coisas que eu guardei com carinho — cada uma dessas memórias vive em mim.
+      </p>
+    </header>
+
+    <div class="momentos-grid">
+      <article class="momento-card">
+        <p class="momento-card__data">daquele dia</p>
+        <h3 class="momento-card__titulo">O título do momento</h3>
+        <p class="momento-card__desc">A história por trás, em uma ou duas frases.</p>
+      </article>
+      <article class="momento-card">
+        <p class="momento-card__data">de uma vez</p>
+        <h3 class="momento-card__titulo">Outro momento</h3>
+        <p class="momento-card__desc">Outra história que merece estar aqui.</p>
+      </article>
+      <article class="momento-card">
+        <p class="momento-card__data">numa tarde</p>
+        <h3 class="momento-card__titulo">Mais um</h3>
+        <p class="momento-card__desc">E mais uma memória que eu carrego.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="amigo-secao amigo-secao--clara">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">que me lembram você</p>
+      <h2 class="amigo-secao__titulo">As cinco músicas</h2>
+      <p class="amigo-secao__subtitulo">
+        As músicas que mais tocaram quando eu pensava em você.
+      </p>
+    </header>
+
+    <ol class="top-musicas" role="list">
+      <li class="top-musica">
+        <span class="top-musica__rank">1</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">Nome da música</span>
+          <span class="top-musica__artista">Nome do artista</span>
+        </div>
+      </li>
+      <li class="top-musica">
+        <span class="top-musica__rank">2</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">Outra música</span>
+          <span class="top-musica__artista">Outro artista</span>
+        </div>
+      </li>
+      <li class="top-musica">
+        <span class="top-musica__rank">3</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">Mais uma</span>
+          <span class="top-musica__artista">Mais um artista</span>
+        </div>
+      </li>
+      <li class="top-musica">
+        <span class="top-musica__rank">4</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">E esta aqui</span>
+          <span class="top-musica__artista">E este artista</span>
+        </div>
+      </li>
+      <li class="top-musica">
+        <span class="top-musica__rank">5</span>
+        <div class="top-musica__info">
+          <span class="top-musica__titulo">Pra fechar o top 5</span>
+          <span class="top-musica__artista">Último artista</span>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="amigo-secao amigo-secao--escura">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">pra ouvir junto</p>
+      <h2 class="amigo-secao__titulo">A playlist</h2>
+      <p class="amigo-secao__subtitulo">
+        As músicas que eu montei pensando em você. Toca quando quiser lembrar de nós.
+      </p>
+    </header>
+
+    <div class="playlist-spotify revelar">
+      <iframe
+        src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0"
+        width="100%"
+        height="480"
+        frameborder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        title="Playlist do Spotify">
+      </iframe>
+    </div>
+  </section>
+
+  <section class="amigo-secao amigo-secao--clara">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">de coração</p>
+      <h2 class="amigo-secao__titulo">A carta</h2>
+    </header>
+
+    <article class="amigo-carta revelar">
+      <div class="amigo-carta__corpo">
+        <p>Vinicius,</p>
+        <p>Aqui é onde eu te escrevo o que o dia a dia não dá tempo. Troque estes parágrafos pela sua carta de verdade — cada parágrafo é uma tag &lt;p&gt; dentro desta div.</p>
+        <p>E no fechamento, o que o coração pedir.</p>
+      </div>
+      <p class="amigo-carta__assinatura">Com amor, sempre</p>
+    </article>
+  </section>
+
+  <section class="amigo-secao amigo-secao--escura">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">recolhidas</p>
+      <h2 class="amigo-secao__titulo">Nossas fotos</h2>
+    </header>
+
+    <div class="amigo-galeria revelar">
+      <figure class="amigo-foto" data-foto="../../assets/images/vinicius-01.jpg">
+        <div class="amigo-foto__placeholder" aria-hidden="true">sua foto</div>
+        <img class="amigo-foto__img" alt="" loading="lazy" />
+        <figcaption class="amigo-foto__legenda">legenda</figcaption>
+      </figure>
+      <figure class="amigo-foto" data-foto="../../assets/images/vinicius-02.jpg">
+        <div class="amigo-foto__placeholder" aria-hidden="true">sua foto</div>
+        <img class="amigo-foto__img" alt="" loading="lazy" />
+        <figcaption class="amigo-foto__legenda">legenda</figcaption>
+      </figure>
+      <figure class="amigo-foto" data-foto="../../assets/images/vinicius-03.jpg">
+        <div class="amigo-foto__placeholder" aria-hidden="true">sua foto</div>
+        <img class="amigo-foto__img" alt="" loading="lazy" />
+        <figcaption class="amigo-foto__legenda">legenda</figcaption>
+      </figure>
+      <figure class="amigo-foto" data-foto="../../assets/images/vinicius-04.jpg">
+        <div class="amigo-foto__placeholder" aria-hidden="true">sua foto</div>
+        <img class="amigo-foto__img" alt="" loading="lazy" />
+        <figcaption class="amigo-foto__legenda">legenda</figcaption>
+      </figure>
+      <figure class="amigo-foto" data-foto="../../assets/images/vinicius-05.jpg">
+        <div class="amigo-foto__placeholder" aria-hidden="true">sua foto</div>
+        <img class="amigo-foto__img" alt="" loading="lazy" />
+        <figcaption class="amigo-foto__legenda">legenda</figcaption>
+      </figure>
+      <figure class="amigo-foto" data-foto="../../assets/images/vinicius-06.jpg">
+        <div class="amigo-foto__placeholder" aria-hidden="true">sua foto</div>
+        <img class="amigo-foto__img" alt="" loading="lazy" />
+        <figcaption class="amigo-foto__legenda">legenda</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="amigo-secao amigo-secao--clara">
+    <header class="amigo-secao__cabecalho revelar">
+      <p class="amigo-secao__olho">em movimento</p>
+      <h2 class="amigo-secao__titulo">Os vídeos</h2>
+    </header>
+
+    <div class="amigo-videos revelar">
+      <div class="amigo-video">
+        <div class="amigo-video__placeholder" aria-hidden="true">
+          <span>seu vídeo aqui</span>
+        </div>
+        <p class="amigo-video__legenda">A legenda do vídeo</p>
+      </div>
+      <div class="amigo-video">
+        <div class="amigo-video__placeholder" aria-hidden="true">
+          <span>outro vídeo</span>
+        </div>
+        <p class="amigo-video__legenda">Outra legenda</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="amigo-encerramento">
+    <p class="amigo-encerramento__frase revelar">
+      Se a Agatha perguntar um dia por que você é importante, espero que ela volte aqui e leia tudo de novo.
+    </p>
+    <a href="../../index.html" class="amigo-encerramento__voltar">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M12 20l1.4-1.4L7.8 13H20v-2H7.8l5.6-5.6L12 4l-8 8z" fill="currentColor"/>
+      </svg>
+      <span>voltar ao começo</span>
+    </a>
+  </section>
+
+  <aside class="player" aria-label="Player de música">
+    <button class="player__botao" id="player-botao" type="button" aria-label="Tocar música" aria-pressed="false">
+      <svg class="player__icone player__icone--play" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 5v14l11-7z" fill="currentColor" />
+      </svg>
+      <svg class="player__icone player__icone--pause" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor" />
+      </svg>
+      <span class="player__rotulo" id="player-rotulo">música</span>
+    </button>
+    <audio id="player-audio" preload="none" loop>
+      <source src="../../assets/audio/musica.mp3" type="audio/mpeg" />
+    </audio>
+  </aside>
+
+  <script src="../../js/amigo.js" defer></script>
+  <script src="../../js/player.js" defer></script>
+</body>
+</html>

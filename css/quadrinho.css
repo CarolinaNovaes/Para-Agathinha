@@ -1,0 +1,188 @@
+/* ============================================================
+   QUADRINHO — livro com virada de pagina 3D
+   ============================================================ */
+
+.livro-container {
+  max-width: 54rem;
+  margin: 0 auto;
+}
+
+/* Livro em si */
+.livro {
+  position: relative;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow:
+    0 2px 0 rgba(255,255,255,0.06) inset,
+    0 30px 80px -20px rgba(0,0,0,0.7);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  background: #0a0510;
+  perspective: 1200px;
+}
+
+/* Paginas */
+.pagina {
+  display: none;
+}
+
+.pagina img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Capa: limita altura para caber em uma tela sem scroll */
+.pagina[data-index="0"] img {
+  max-height: 74vh;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Pagina ativa: entra girando */
+.pagina--ativa {
+  display: block;
+  animation: paginaEntrar 0.3s ease-out 0.2s both;
+}
+
+/* Pagina que esta saindo: fica absoluta e gira pra fora */
+.pagina--saindo {
+  display: block;
+  position: absolute;
+  inset: 0;
+  animation: paginaSair 0.22s ease-in both;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.pagina--saindo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Direcao reversa (voltando pagina) */
+.pagina--ativa.reverso {
+  animation-name: paginaEntrarReverso;
+}
+
+.pagina--saindo.reverso {
+  animation-name: paginaSairReverso;
+}
+
+/* ---- Animacoes de flip ---- */
+@keyframes paginaSair {
+  from { opacity: 1; transform: rotateY(0deg); }
+  to   { opacity: 0; transform: rotateY(-80deg); }
+}
+
+@keyframes paginaEntrar {
+  from { opacity: 0; transform: rotateY(80deg); }
+  to   { opacity: 1; transform: rotateY(0deg); }
+}
+
+@keyframes paginaSairReverso {
+  from { opacity: 1; transform: rotateY(0deg); }
+  to   { opacity: 0; transform: rotateY(80deg); }
+}
+
+@keyframes paginaEntrarReverso {
+  from { opacity: 0; transform: rotateY(-80deg); }
+  to   { opacity: 1; transform: rotateY(0deg); }
+}
+
+/* Dica de clique que aparece brevemente no inicio */
+.livro-dica {
+  position: absolute;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 5;
+  font-family: var(--fonte-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.6);
+  background: rgba(0,0,0,0.5);
+  padding: 0.35rem 0.75rem;
+  border-radius: 100px;
+  pointer-events: none;
+  animation: dicaSumir 1s ease 3s forwards;
+}
+
+@keyframes dicaSumir {
+  to { opacity: 0; }
+}
+
+/* Navegacao */
+.livro-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.livro-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(168,137,198,0.3);
+  background: transparent;
+  color: var(--amigo-cor-clara, #c4a8e0);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.livro-btn:hover:not(:disabled) {
+  background: rgba(168,137,198,0.15);
+  border-color: var(--amigo-cor-clara, #c4a8e0);
+  transform: scale(1.08);
+}
+
+.livro-btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.livro-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.livro-contador {
+  font-family: var(--fonte-sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.3em;
+  color: var(--amigo-cor-clara, #c4a8e0);
+  opacity: 0.65;
+  min-width: 4rem;
+  text-align: center;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .livro-nav {
+    gap: 1.5rem;
+  }
+
+  .pagina[data-index="0"] img {
+    max-height: 60vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pagina--ativa,
+  .pagina--saindo,
+  .pagina--ativa.reverso,
+  .pagina--saindo.reverso {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
