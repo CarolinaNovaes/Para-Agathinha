@@ -18,6 +18,40 @@ body.amigo {
 }
 
 /* ============================================================
+   NAV TOPO FIXO
+   ============================================================ */
+.nav-topo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 1rem 2rem;
+  background: rgba(15, 8, 21, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(168, 137, 198, 0.1);
+  transition: border-color 0.3s ease;
+}
+
+.nav-topo__link {
+  font-family: var(--fonte-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.35em;
+  color: rgba(196, 168, 224, 0.6);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.nav-topo__link:hover {
+  color: var(--creme);
+}
+
+/* ============================================================
    PRIMEIRA DOBRA — "Para você de: [Nome]"
    Substitui o hero grandão antigo
    ============================================================ */

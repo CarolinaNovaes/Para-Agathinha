@@ -118,9 +118,25 @@
   }
 
   // ----------------------------------------------------------
+  // Nav topo fixo
+  // ----------------------------------------------------------
+  function criarNav() {
+    const base = document.body.dataset.amigo ? '../../' : '';
+    const nav = document.createElement('nav');
+    nav.className = 'nav-topo';
+    nav.setAttribute('aria-label', 'Navegação principal');
+    nav.innerHTML = `
+      <a class="nav-topo__link" href="${base}index.html">Home</a>
+      <a class="nav-topo__link" href="${base}index.html#portas">Portas</a>
+    `;
+    document.body.prepend(nav);
+  }
+
+  // ----------------------------------------------------------
   // Inicialização
   // ----------------------------------------------------------
   function init() {
+    criarNav();
     animarContadores();
     animarTopMusicas();
     animarMomentos();
