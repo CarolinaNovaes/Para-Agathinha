@@ -87,18 +87,23 @@ body.home {
 
 /* ============================================================
    OVERLAY FLORAL — fundo decorativo em todas as páginas
-   Técnica: invert() faz o branco virar preto (= transparente
-   no mix-blend-mode: screen) mantendo as linhas roxas visíveis.
+   filter e mix-blend-mode ficam em elementos separados para
+   evitar que o filter crie isolamento e quebre o blend.
    ============================================================ */
 .flores-bg {
   position: fixed;
   inset: 0;
   z-index: 6;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.flores-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
   background: url('../assets/images/background.png') center / cover no-repeat;
   filter: invert(1) hue-rotate(185deg) brightness(0.38) saturate(1.2);
-  mix-blend-mode: screen;
-  opacity: 0.45;
-  pointer-events: none;
 }
 
 /* Textura sutil de papel em todo o corpo (não é barulhenta) */

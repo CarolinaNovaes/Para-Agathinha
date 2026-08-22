@@ -121,32 +121,34 @@
     var video        = document.getElementById('video-intro');
     var btnFechar    = document.getElementById('btn-fechar-video');
 
-    function fechar() {
-      video.pause();
-      video.currentTime = 0;
-      videoOverlay.classList.remove('ativo');
-      videoOverlay.setAttribute('aria-hidden', 'true');
-      setTimeout(function () { etapa3(); }, 1200);
-    }
+    etapaOrigem.classList.add('etapa--fade-saindo');
 
-    // Play IMEDIATAMENTE — deve ser chamado dentro do gesto do usuario
-    video.play().catch(function () {
-      // Autoplay bloqueado ou arquivo nao encontrado — vai direto pras portas
+    // Play dentro do gesto do usuario
+    video.play().then(function () {
+      // Video funcionou — exibe o overlay e configura fechamento
+      videoOverlay.classList.add('ativo');
+      videoOverlay.removeAttribute('aria-hidden');
+
+      setTimeout(function () {
+        etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
+      }, 750);
+
+      function fechar() {
+        video.pause();
+        video.currentTime = 0;
+        videoOverlay.classList.remove('ativo');
+        videoOverlay.setAttribute('aria-hidden', 'true');
+        setTimeout(function () { etapa3(); }, 1200);
+      }
+
+      video.addEventListener('ended', fechar, { once: true });
+      video.addEventListener('error',  fechar, { once: true });
+      btnFechar.addEventListener('click', fechar, { once: true });
+    }).catch(function () {
+      // Video nao existe ou autoplay bloqueado — vai direto pras portas
+      etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
       etapa3();
     });
-
-    // Fade suave da etapa de origem (em paralelo com o inicio do play)
-    etapaOrigem.classList.add('etapa--fade-saindo');
-    videoOverlay.classList.add('ativo');
-    videoOverlay.removeAttribute('aria-hidden');
-
-    setTimeout(function () {
-      etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
-    }, 750);
-
-    video.addEventListener('ended', fechar, { once: true });
-    video.addEventListener('error',  fechar, { once: true });
-    btnFechar.addEventListener('click', fechar, { once: true });
   }
 
   // ----------------------------------------------------------
