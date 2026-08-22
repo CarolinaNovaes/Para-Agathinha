@@ -114,33 +114,6 @@
   }
 
   // ----------------------------------------------------------
-  // YouTube Player (inicializado pelo iframe_api do index.html)
-  // ----------------------------------------------------------
-  window.onYouTubeIframeAPIReady = function () {
-    window.ytPlayer = new YT.Player('video-intro-yt', {
-      videoId: 'iXkvIKq--EY',
-      playerVars: {
-        autoplay: 0,
-        controls: 0,
-        rel: 0,
-        modestbranding: 1,
-        playsinline: 1,
-        iv_load_policy: 3
-      },
-      events: {
-        onStateChange: function (e) {
-          if (e.data === YT.PlayerState.ENDED && window._ytFechar) {
-            window._ytFechar();
-          }
-        },
-        onError: function () {
-          if (window._ytFechar) window._ytFechar();
-        }
-      }
-    });
-  };
-
-  // ----------------------------------------------------------
   // Video intro fullscreen
   // ----------------------------------------------------------
   function abrirVideo(etapaOrigem) {
