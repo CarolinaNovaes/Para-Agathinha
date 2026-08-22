@@ -186,23 +186,6 @@
   <!-- Video intro fullscreen -->
   <div id="video-intro-overlay" class="video-intro-overlay" aria-hidden="true">
     <div id="video-intro-yt"></div>
-    <script>
-      window.onYouTubeIframeAPIReady = function () {
-        window.ytPlayer = new YT.Player('video-intro-yt', {
-          videoId: 'iXkvIKq--EY',
-          playerVars: { autoplay: 0, controls: 0, rel: 0, modestbranding: 1, playsinline: 1, iv_load_policy: 3 },
-          events: {
-            onStateChange: function (e) {
-              if (e.data === YT.PlayerState.ENDED && window._ytFechar) window._ytFechar();
-            },
-            onError: function () {
-              if (window._ytFechar) window._ytFechar();
-            }
-          }
-        });
-      };
-    </script>
-    <script src="https://www.youtube.com/iframe_api"></script>
     <button id="btn-fechar-video" type="button" aria-label="Fechar vídeo e continuar">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="currentColor"/>

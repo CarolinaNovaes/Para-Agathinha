@@ -114,21 +114,21 @@
   }
 
   // ----------------------------------------------------------
-  // Video intro fullscreen
+  // Video intro fullscreen (YouTube via iframe direto)
   // ----------------------------------------------------------
   function abrirVideo(etapaOrigem) {
     var videoOverlay = document.getElementById('video-intro-overlay');
+    var ytDiv        = document.getElementById('video-intro-yt');
     var btnFechar    = document.getElementById('btn-fechar-video');
 
+    // Cria o iframe no momento exato do clique — garante autoplay
+    var iframe = document.createElement('iframe');
+    iframe.src = 'https://www.youtube.com/embed/iXkvIKq--EY?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&enablejsapi=1';
+    iframe.allow = 'autoplay; fullscreen';
+    iframe.setAttribute('allowfullscreen', '');
+    ytDiv.appendChild(iframe);
+
     etapaOrigem.classList.add('etapa--fade-saindo');
-
-    var player = window.ytPlayer;
-    if (!player || typeof player.playVideo !== 'function') {
-      etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
-      etapa3();
-      return;
-    }
-
     videoOverlay.classList.add('ativo');
     videoOverlay.removeAttribute('aria-hidden');
 
@@ -136,18 +136,27 @@
       etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
     }, 750);
 
-    player.playVideo();
-
     function fechar() {
-      window._ytFechar = null;
-      player.pauseVideo();
-      player.seekTo(0, true);
+      window.removeEventListener('message', onMsg);
+      iframe.src = '';
+      ytDiv.innerHTML = '';
       videoOverlay.classList.remove('ativo');
       videoOverlay.setAttribute('aria-hidden', 'true');
       setTimeout(function () { etapa3(); }, 1200);
     }
 
-    window._ytFechar = fechar;
+    // Detecta fim do video via postMessage do YouTube
+    function onMsg(e) {
+      if (e.origin !== 'https://www.youtube.com') return;
+      try {
+        var d = JSON.parse(e.data);
+        var ended = (d.event === 'onStateChange' && d.info === 0) ||
+                    (d.event === 'infoDelivery' && d.info && d.info.playerState === 0);
+        if (ended) fechar();
+      } catch (_) {}
+    }
+    window.addEventListener('message', onMsg);
+
     btnFechar.addEventListener('click', fechar, { once: true });
   }
 
