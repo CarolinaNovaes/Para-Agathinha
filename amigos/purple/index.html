@@ -117,6 +117,81 @@
       max-height: 80vh;
       border-radius: 0 0 10px 10px;
     }
+
+    /* ---- Seção carta + vídeo de Purple ---- */
+    .purple-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .purple-intro { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+    }
+
+    .purple-intro__video {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .purple-intro__video video {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .purple-bilhete {
+      background: #fdfcfa;
+      border-radius: 2px;
+      padding: 2rem 2rem 2.5rem;
+      box-shadow: 3px 6px 28px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.2);
+      transform: rotate(-1.2deg);
+      position: relative;
+    }
+
+    .purple-bilhete::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 40px; height: 18px;
+      background: rgba(176,156,208,0.55);
+      border-radius: 0 0 4px 4px;
+    }
+
+    .purple-bilhete__de {
+      font-family: var(--fonte-sans);
+      font-size: 0.62rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: #b09cd0;
+      margin-bottom: 1.2rem;
+    }
+
+    .purple-bilhete__texto {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+      color: #2a2a2a;
+      line-height: 1.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .purple-bilhete__texto p { margin-bottom: 0.9em; }
+    .purple-bilhete__texto p:last-child { margin-bottom: 0; }
+
+    .purple-bilhete__assinatura {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.1rem;
+      color: #555;
+      border-top: 1px solid rgba(176,156,208,0.3);
+      padding-top: 1rem;
+      line-height: 1.7;
+    }
   </style>
 </head>
 
@@ -137,6 +212,32 @@
       <svg viewBox="0 0 24 24">
         <path d="M20 12l-1.41-1.41L13 16.17V4h-2v12.17l-5.58-5.59L4 12l8 8 8-8z" fill="currentColor"/>
       </svg>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CARTA + VIDEO DE PURPLE
+       ============================================ -->
+  <section class="amigo-secao amigo-secao--escura revelar">
+    <div class="purple-intro">
+      <div class="purple-intro__video">
+        <video src="../../assets/videos/Purple.mp4" controls preload="metadata" playsinline aria-label="Mensagem de Purple para Agatha"></video>
+      </div>
+
+      <div class="purple-bilhete">
+        <p class="purple-bilhete__de">Uma mensagem</p>
+        <div class="purple-bilhete__texto">
+          <p>Agathinha,</p>
+          <p>Obrigado por me resgatar daquele cantinho solitário e me mostrar como é ter reciprocidade em uma amizade. 🥹💜</p>
+          <p>Obrigado por me incentivar a ler de novo, por todos os filmes, todos os livros e por todas as risadas que você sempre me proporciona. 📚🎬🫶🏻</p>
+          <p>Te amo demais! 💜🦊✨</p>
+        </div>
+        <p class="purple-bilhete__assinatura">
+          De: Roxo 💜<br>
+          Para: Agathinha 🌷<br>
+          A maior streamer e professora de Valorant do mundo! 🎮👑✨
+        </p>
+      </div>
     </div>
   </section>
 
