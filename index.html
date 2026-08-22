@@ -31,13 +31,13 @@
   <!-- ETAPA 2 — Texto de introdução -->
   <section id="etapa-2" class="etapa etapa--2" aria-label="Introdução">
     <div class="etapa__conteudo">
-      <h2 class="etapa__olho">Comece por aqui</h2>
+      <h2 class="etapa__olho">Feliz aniversário</h2>
       <div class="introducao" id="introducao-texto" aria-live="polite"></div>
-      <button class="etapa__avancar" id="btn-continuar" type="button" aria-label="Conhecer quem te ama">
-        <span>Conhecer quem te ama</span>
+      <button class="etapa__avancar etapa__avancar--play" id="btn-continuar" type="button" aria-label="Assistir vídeo">
         <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 4l-1.4 1.4L16.2 11H4v2h12.2l-5.6 5.6L12 20l8-8z" fill="currentColor"/>
+          <path d="M8 5v14l11-7z" fill="currentColor"/>
         </svg>
+        <span>Play</span>
       </button>
     </div>
   </section>
@@ -45,12 +45,16 @@
   <!-- ETAPA 3 — As três portas -->
   <section id="etapa-3" class="etapa etapa--3" aria-label="As portas">
 
-    <button class="btn-voltar-intro" id="btn-voltar-intro" type="button" aria-label="Voltar para o começo">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
-      </svg>
-      <span>Comece por aqui</span>
-    </button>
+    <!-- Nav topo: voltar + créditos -->
+    <nav class="nav-portas-topo" id="nav-portas-topo" aria-label="Navegação">
+      <button class="btn-voltar-intro" id="btn-voltar-intro" type="button" aria-label="Voltar para o começo">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+        </svg>
+        <span>Feliz aniversário</span>
+      </button>
+      <a href="creditos.html" class="nav-creditos-link">Créditos</a>
+    </nav>
 
     <div class="etapa__conteudo etapa__conteudo--portas">
       <h2 class="etapa__olho">Abra uma porta</h2>
@@ -126,10 +130,18 @@
           </a>
         </div>
       </nav>
-
-      <a href="creditos.html" class="btn-creditos" aria-label="Ver créditos">Créditos</a>
     </div>
   </section>
+
+  <!-- Video intro fullscreen -->
+  <div id="video-intro-overlay" class="video-intro-overlay" aria-hidden="true">
+    <video id="video-intro" src="assets/videos/intro.mp4" playsinline preload="metadata"></video>
+    <button id="btn-fechar-video" type="button" aria-label="Fechar vídeo e continuar">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
 
   <!-- Overlay de transição de página -->
   <div class="transicao-overlay" id="transicao-overlay" aria-hidden="true"></div>
