@@ -114,41 +114,68 @@
   }
 
   // ----------------------------------------------------------
+  // YouTube Player (inicializado pelo iframe_api do index.html)
+  // ----------------------------------------------------------
+  window.onYouTubeIframeAPIReady = function () {
+    window.ytPlayer = new YT.Player('video-intro-yt', {
+      videoId: 'iXkvIKq--EY',
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        rel: 0,
+        modestbranding: 1,
+        playsinline: 1,
+        iv_load_policy: 3
+      },
+      events: {
+        onStateChange: function (e) {
+          if (e.data === YT.PlayerState.ENDED && window._ytFechar) {
+            window._ytFechar();
+          }
+        },
+        onError: function () {
+          if (window._ytFechar) window._ytFechar();
+        }
+      }
+    });
+  };
+
+  // ----------------------------------------------------------
   // Video intro fullscreen
   // ----------------------------------------------------------
   function abrirVideo(etapaOrigem) {
     var videoOverlay = document.getElementById('video-intro-overlay');
-    var video        = document.getElementById('video-intro');
     var btnFechar    = document.getElementById('btn-fechar-video');
 
     etapaOrigem.classList.add('etapa--fade-saindo');
 
-    // Play dentro do gesto do usuario
-    video.play().then(function () {
-      // Video funcionou — exibe o overlay e configura fechamento
-      videoOverlay.classList.add('ativo');
-      videoOverlay.removeAttribute('aria-hidden');
-
-      setTimeout(function () {
-        etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
-      }, 750);
-
-      function fechar() {
-        video.pause();
-        video.currentTime = 0;
-        videoOverlay.classList.remove('ativo');
-        videoOverlay.setAttribute('aria-hidden', 'true');
-        setTimeout(function () { etapa3(); }, 1200);
-      }
-
-      video.addEventListener('ended', fechar, { once: true });
-      video.addEventListener('error',  fechar, { once: true });
-      btnFechar.addEventListener('click', fechar, { once: true });
-    }).catch(function () {
-      // Video nao existe ou autoplay bloqueado — vai direto pras portas
+    var player = window.ytPlayer;
+    if (!player || typeof player.playVideo !== 'function') {
       etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
       etapa3();
-    });
+      return;
+    }
+
+    videoOverlay.classList.add('ativo');
+    videoOverlay.removeAttribute('aria-hidden');
+
+    setTimeout(function () {
+      etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
+    }, 750);
+
+    player.playVideo();
+
+    function fechar() {
+      window._ytFechar = null;
+      player.pauseVideo();
+      player.seekTo(0, true);
+      videoOverlay.classList.remove('ativo');
+      videoOverlay.setAttribute('aria-hidden', 'true');
+      setTimeout(function () { etapa3(); }, 1200);
+    }
+
+    window._ytFechar = fechar;
+    btnFechar.addEventListener('click', fechar, { once: true });
   }
 
   // ----------------------------------------------------------
