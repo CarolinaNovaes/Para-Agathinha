@@ -121,17 +121,6 @@
     var video        = document.getElementById('video-intro');
     var btnFechar    = document.getElementById('btn-fechar-video');
 
-    // Fade suave da etapa de origem antes de abrir o vídeo
-    etapaOrigem.classList.add('etapa--fade-saindo');
-    setTimeout(function () {
-      etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
-
-      videoOverlay.classList.add('ativo');
-      videoOverlay.removeAttribute('aria-hidden');
-
-      video.play().catch(fechar);
-    }, 750);
-
     function fechar() {
       video.pause();
       video.currentTime = 0;
@@ -139,6 +128,21 @@
       videoOverlay.setAttribute('aria-hidden', 'true');
       setTimeout(function () { etapa3(); }, 1200);
     }
+
+    // Play IMEDIATAMENTE — deve ser chamado dentro do gesto do usuario
+    video.play().catch(function () {
+      // Autoplay bloqueado ou arquivo nao encontrado — vai direto pras portas
+      etapa3();
+    });
+
+    // Fade suave da etapa de origem (em paralelo com o inicio do play)
+    etapaOrigem.classList.add('etapa--fade-saindo');
+    videoOverlay.classList.add('ativo');
+    videoOverlay.removeAttribute('aria-hidden');
+
+    setTimeout(function () {
+      etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
+    }, 750);
 
     video.addEventListener('ended', fechar, { once: true });
     video.addEventListener('error',  fechar, { once: true });
