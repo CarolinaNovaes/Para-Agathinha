@@ -114,50 +114,38 @@
   }
 
   // ----------------------------------------------------------
-  // Video intro fullscreen (YouTube via iframe direto)
+  // Video intro fullscreen
   // ----------------------------------------------------------
   function abrirVideo(etapaOrigem) {
     var videoOverlay = document.getElementById('video-intro-overlay');
-    var ytDiv        = document.getElementById('video-intro-yt');
+    var video        = document.getElementById('video-intro');
     var btnFechar    = document.getElementById('btn-fechar-video');
 
-    // Cria o iframe no momento exato do clique — garante autoplay
-    var iframe = document.createElement('iframe');
-    iframe.src = 'https://www.youtube.com/embed/iXkvIKq--EY?autoplay=1&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&enablejsapi=1';
-    iframe.allow = 'autoplay; fullscreen';
-    iframe.setAttribute('allowfullscreen', '');
-    ytDiv.appendChild(iframe);
-
     etapaOrigem.classList.add('etapa--fade-saindo');
-    videoOverlay.classList.add('ativo');
-    videoOverlay.removeAttribute('aria-hidden');
 
-    setTimeout(function () {
+    video.play().then(function () {
+      videoOverlay.classList.add('ativo');
+      videoOverlay.removeAttribute('aria-hidden');
+
+      setTimeout(function () {
+        etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
+      }, 750);
+
+      function fechar() {
+        video.pause();
+        video.currentTime = 0;
+        videoOverlay.classList.remove('ativo');
+        videoOverlay.setAttribute('aria-hidden', 'true');
+        setTimeout(function () { etapa3(); }, 1200);
+      }
+
+      video.addEventListener('ended', fechar, { once: true });
+      video.addEventListener('error',  fechar, { once: true });
+      btnFechar.addEventListener('click', fechar, { once: true });
+    }).catch(function () {
       etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
-    }, 750);
-
-    function fechar() {
-      window.removeEventListener('message', onMsg);
-      iframe.src = '';
-      ytDiv.innerHTML = '';
-      videoOverlay.classList.remove('ativo');
-      videoOverlay.setAttribute('aria-hidden', 'true');
-      setTimeout(function () { etapa3(); }, 1200);
-    }
-
-    // Detecta fim do video via postMessage do YouTube
-    function onMsg(e) {
-      if (e.origin !== 'https://www.youtube.com') return;
-      try {
-        var d = JSON.parse(e.data);
-        var ended = (d.event === 'onStateChange' && d.info === 0) ||
-                    (d.event === 'infoDelivery' && d.info && d.info.playerState === 0);
-        if (ended) fechar();
-      } catch (_) {}
-    }
-    window.addEventListener('message', onMsg);
-
-    btnFechar.addEventListener('click', fechar, { once: true });
+      etapa3();
+    });
   }
 
   // ----------------------------------------------------------

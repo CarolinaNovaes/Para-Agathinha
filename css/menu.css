@@ -216,13 +216,10 @@ body.home.etapa-livre {
   pointer-events: auto;
 }
 
-.video-intro-overlay #video-intro-yt,
-.video-intro-overlay #video-intro-yt iframe {
-  position: absolute;
-  inset: 0;
+.video-intro-overlay video {
   width: 100%;
   height: 100%;
-  border: none;
+  object-fit: contain;
 }
 
 #btn-fechar-video {
