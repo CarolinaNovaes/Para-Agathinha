@@ -55,10 +55,10 @@
        ==================================================== */
     .bloco {
       display: grid;
-      grid-template-columns: 1fr 1.6fr 1fr;
-      gap: 1.5rem;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
       align-items: center;
-      max-width: 860px;
+      max-width: 1100px;
       margin: 0 auto 5rem;
     }
 
@@ -71,16 +71,36 @@
        ==================================================== */
     .cr-img {
       width: 100%;
-      max-width: 190px;
+      max-width: 340px;
       height: auto;
       display: block;
       border-radius: 4px;
-      opacity: 0.18;
-      filter: grayscale(25%) contrast(0.85);
+      opacity: 0.88;
+      filter: brightness(0.85) saturate(0.9);
     }
 
     /* staircase: imagens dos blocos pares descem um pouco */
-    .bloco:nth-child(even) .cr-img { margin-top: 90px; }
+    .bloco:nth-child(even) .cr-img { margin-top: 80px; }
+
+    /* ====================================================
+       PAUSA
+       ==================================================== */
+    #pausa-indicador {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 400;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: rgba(255, 255, 255, 0.9);
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      text-shadow: 0 0 40px rgba(255,255,255,0.3);
+    }
+    #pausa-indicador.visivel { opacity: 1; }
 
     /* ====================================================
        TEXTO DOS CRÉDITOS
@@ -365,6 +385,9 @@
 <!-- overlay preto pós-TV -->
 <div id="tela-preta"></div>
 
+<!-- indicador de pausa/play -->
+<div id="pausa-indicador" aria-hidden="true"></div>
+
 <button id="btn-skip" aria-label="Pular créditos">PULAR</button>
 
 <script>
@@ -377,28 +400,40 @@
   const continua   = document.getElementById('texto-continua');
   const telaPreta  = document.getElementById('tela-preta');
   const btnSkip    = document.getElementById('btn-skip');
+  const pausaInd   = document.getElementById('pausa-indicador');
 
-  const SPEED = 52; // px/s — ajuste aqui para mais rápido ou mais lento
+  const SPEED = 52;
   let encerrado = false;
+  let pausado   = false;
+  let timer_tAppear, timer_tCenter;
 
   function encerrar() {
     if (encerrado) return;
     encerrado = true;
-
-    // Glitch
     continua.classList.add('glitchando');
-
     setTimeout(function () {
       continua.classList.remove('glitchando');
       continua.style.display = 'none';
-
-      // TV off
       wrapper.classList.add('tv-off');
-
-      setTimeout(function () {
-        telaPreta.classList.add('visivel');
-      }, 1800);
+      setTimeout(function () { telaPreta.classList.add('visivel'); }, 1800);
     }, 2800);
+  }
+
+  // Pausa / retoma
+  var esconderTimer;
+  function togglePausa() {
+    if (encerrado) return;
+    pausado = !pausado;
+    rolo.style.animationPlayState = pausado ? 'paused' : 'running';
+
+    clearTimeout(esconderTimer);
+    pausaInd.textContent = pausado ? 'II' : 'PLAY';
+    pausaInd.classList.add('visivel');
+    if (!pausado) {
+      esconderTimer = setTimeout(function () {
+        pausaInd.classList.remove('visivel');
+      }, 800);
+    }
   }
 
   window.addEventListener('load', function () {
@@ -408,9 +443,8 @@
     var startY = vh;
     var endY   = -h;
     var travel = h + vh;
-    var dur    = travel / SPEED; // segundos
+    var dur    = travel / SPEED;
 
-    // Cria keyframe dinamicamente para evitar limitações de var() em @keyframes
     var style = document.createElement('style');
     style.textContent =
       '@keyframes subir {' +
@@ -421,22 +455,25 @@
 
     rolo.style.animation = 'subir ' + dur + 's linear forwards';
 
-    // Quando a seção final chega ao centro da tela
-    var finalMid  = finalSec.offsetTop + finalSec.offsetHeight * 0.5;
-    var tAppear   = Math.max(0, (startY + finalSec.offsetTop - vh * 1.1) / SPEED);
-    var tCenter   = (startY + finalMid - vh * 0.5) / SPEED;
+    var finalMid = finalSec.offsetTop + finalSec.offsetHeight * 0.5;
+    var tAppear  = Math.max(0, (startY + finalSec.offsetTop - vh * 1.1) / SPEED);
+    var tCenter  = (startY + finalMid - vh * 0.5) / SPEED;
 
-    // Fade in da seção final
-    setTimeout(function () {
-      finalSec.classList.add('visivel');
-    }, tAppear * 1000);
+    timer_tAppear = setTimeout(function () { finalSec.classList.add('visivel'); }, tAppear * 1000);
+    timer_tCenter = setTimeout(encerrar, tCenter * 1000);
+  });
 
-    // Glitch + encerramento quando centrada
-    setTimeout(encerrar, tCenter * 1000);
+  // Clicar na tela pausa/retoma
+  wrapper.addEventListener('click', function (e) {
+    if (e.target === btnSkip) return;
+    togglePausa();
   });
 
   // Pular créditos
   function pular() {
+    if (pausado) togglePausa();
+    clearTimeout(timer_tAppear);
+    clearTimeout(timer_tCenter);
     rolo.style.animation = 'none';
     finalSec.classList.add('visivel');
     setTimeout(encerrar, 2500);
@@ -445,7 +482,8 @@
 
   btnSkip.addEventListener('click', pular);
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' || e.key === ' ') pular();
+    if (e.key === ' ') { e.preventDefault(); togglePausa(); }
+    if (e.key === 'Escape') pular();
   });
 })();
 </script>
