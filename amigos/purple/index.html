@@ -118,37 +118,35 @@
       border-radius: 0 0 10px 10px;
     }
 
-    /* ---- Seção carta + vídeo de Purple ---- */
-    .purple-intro {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-      max-width: 900px;
+    /* ---- Seção vídeo de Purple ---- */
+    .purple-video-wrap {
+      max-width: 820px;
       margin: 0 auto;
-      padding: 5rem 1.5rem;
+      padding: 4rem 1.5rem 5rem;
     }
 
-    @media (max-width: 700px) {
-      .purple-intro { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
-    }
-
-    .purple-intro__video {
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    }
-
-    .purple-intro__video video {
+    .purple-video-wrap video {
       display: block;
       width: 100%;
       height: auto;
+      border-radius: 10px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.55);
+    }
+
+    /* ---- Seção bilhete de Purple ---- */
+    .purple-bilhete-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 5rem 1.5rem 6rem;
     }
 
     .purple-bilhete {
       background: #fdfcfa;
       border-radius: 2px;
       padding: 2rem 2rem 2.5rem;
+      max-width: 480px;
+      width: 100%;
       box-shadow: 3px 6px 28px rgba(0,0,0,0.45), 0 1px 3px rgba(0,0,0,0.2);
       transform: rotate(-1.2deg);
       position: relative;
@@ -216,14 +214,19 @@
   </section>
 
   <!-- ============================================
-       CARTA + VIDEO DE PURPLE
+       VIDEO DE PURPLE
        ============================================ -->
   <section class="amigo-secao amigo-secao--escura">
-    <div class="purple-intro">
-      <div class="purple-intro__video">
-        <video src="../../assets/videos/Purple.mp4" controls preload="metadata" playsinline aria-label="Mensagem de Purple para Agatha"></video>
-      </div>
+    <div class="purple-video-wrap">
+      <video src="../../assets/videos/Purple.mp4" controls preload="metadata" playsinline aria-label="Mensagem de Purple para Agatha"></video>
+    </div>
+  </section>
 
+  <!-- ============================================
+       BILHETE DE PURPLE
+       ============================================ -->
+  <section class="amigo-secao amigo-secao--escura">
+    <div class="purple-bilhete-wrap">
       <div class="purple-bilhete">
         <p class="purple-bilhete__de">Uma mensagem</p>
         <div class="purple-bilhete__texto">
