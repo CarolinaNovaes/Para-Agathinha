@@ -76,13 +76,27 @@
     container.innerHTML = '';
     botao.classList.remove('etapa__avancar--visivel');
 
-    etapa.classList.add('etapa--ativa');
-
-    TEXTO_INTRODUCAO.forEach(function () {
+    // Pré-renderiza invisível para medir alturas e travar o layout
+    TEXTO_INTRODUCAO.forEach(function (linha) {
       var p = document.createElement('p');
+      p.textContent = linha;
+      p.style.opacity = '0';
       container.appendChild(p);
     });
+
+    etapa.classList.add('etapa--ativa');
+
+    // Aguarda dois frames para o browser medir os elementos
+    await new Promise(function (r) { requestAnimationFrame(function () { requestAnimationFrame(r); }); });
+
     var paragrafos = container.querySelectorAll('p');
+
+    // Trava a altura de cada parágrafo e limpa o texto
+    paragrafos.forEach(function (p) {
+      p.style.minHeight = p.offsetHeight + 'px';
+      p.textContent = '';
+      p.style.opacity = '1';
+    });
 
     for (var i = 0; i < TEXTO_INTRODUCAO.length; i++) {
       paragrafos[i].classList.add('digitando');
@@ -107,20 +121,23 @@
     var video        = document.getElementById('video-intro');
     var btnFechar    = document.getElementById('btn-fechar-video');
 
-    videoOverlay.classList.add('ativo');
-    videoOverlay.removeAttribute('aria-hidden');
+    // Fade suave da etapa de origem antes de abrir o vídeo
+    etapaOrigem.classList.add('etapa--fade-saindo');
+    setTimeout(function () {
+      etapaOrigem.classList.remove('etapa--ativa', 'etapa--fade-saindo');
 
-    video.play().catch(function () {
-      // autoplay bloqueado — vai direto pras portas
-      fechar();
-    });
+      videoOverlay.classList.add('ativo');
+      videoOverlay.removeAttribute('aria-hidden');
+
+      video.play().catch(fechar);
+    }, 750);
 
     function fechar() {
       video.pause();
       video.currentTime = 0;
       videoOverlay.classList.remove('ativo');
       videoOverlay.setAttribute('aria-hidden', 'true');
-      irPara(etapaOrigem, function () { etapa3(); });
+      setTimeout(function () { etapa3(); }, 1200);
     }
 
     video.addEventListener('ended', fechar, { once: true });
