@@ -92,8 +92,9 @@ body.home.etapa-livre {
 .etapa--2 {
   background: radial-gradient(ellipse at top, rgba(168,137,198,0.1), transparent 60%),
               var(--roxo-noite);
-  align-items: flex-start;
-  padding-top: 12vh;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0;
 }
 
 .etapa__olho {
@@ -101,25 +102,24 @@ body.home.etapa-livre {
   font-size: var(--tamanho-pequeno);
   letter-spacing: 0.5em;
   color: var(--roxo-claro);
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   font-weight: 400;
 }
 
 .introducao {
   font-family: var(--fonte-serif);
-  font-size: clamp(1.15rem, 2vw, 1.4rem);
-  line-height: 1.9;
+  font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+  line-height: 1.65;
   color: var(--creme);
-  max-width: 38rem;
-  margin: 0 auto 3.5rem;
+  max-width: 32rem;
+  margin: 0 auto 2rem;
   text-align: left;
-  min-height: 8em;
   font-weight: 300;
   font-style: italic;
   opacity: 0.92;
 }
 
-.introducao p { margin-bottom: 1em; }
+.introducao p { margin-bottom: 0.55em; }
 .introducao p:last-child { margin-bottom: 0; }
 
 .introducao p.digitando::after {
@@ -317,7 +317,13 @@ body.home.etapa-livre {
   height: 14px;
 }
 
-.nav-creditos-link {
+.nav-portas-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-topo__link {
   font-family: var(--fonte-sans);
   font-size: 0.72rem;
   letter-spacing: 0.35em;
@@ -327,7 +333,7 @@ body.home.etapa-livre {
   transition: color 0.25s ease;
 }
 
-.nav-creditos-link:hover {
+.nav-topo__link:hover {
   color: var(--creme);
 }
 

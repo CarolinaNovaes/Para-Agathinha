@@ -128,6 +128,7 @@
     nav.innerHTML = `
       <a class="nav-topo__link" href="${base}index.html">Home</a>
       <a class="nav-topo__link" href="${base}index.html#portas">Portas</a>
+      <a class="nav-topo__link" href="${base}creditos.html">Créditos</a>
     `;
     document.body.prepend(nav);
   }
