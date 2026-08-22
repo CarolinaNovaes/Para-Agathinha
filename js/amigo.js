@@ -134,9 +134,20 @@
   }
 
   // ----------------------------------------------------------
+  // Overlay floral de fundo
+  // ----------------------------------------------------------
+  function adicionarFlores() {
+    var div = document.createElement('div');
+    div.className = 'flores-bg';
+    div.setAttribute('aria-hidden', 'true');
+    document.body.insertBefore(div, document.body.firstChild);
+  }
+
+  // ----------------------------------------------------------
   // Inicialização
   // ----------------------------------------------------------
   function init() {
+    adicionarFlores();
     criarNav();
     animarContadores();
     animarTopMusicas();

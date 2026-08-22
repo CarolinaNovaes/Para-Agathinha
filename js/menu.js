@@ -192,9 +192,20 @@
   });
 
   // ----------------------------------------------------------
+  // Overlay floral de fundo
+  // ----------------------------------------------------------
+  function adicionarFlores() {
+    var div = document.createElement('div');
+    div.className = 'flores-bg';
+    div.setAttribute('aria-hidden', 'true');
+    document.body.insertBefore(div, document.body.firstChild);
+  }
+
+  // ----------------------------------------------------------
   // Inicializacao
   // ----------------------------------------------------------
   function init() {
+    adicionarFlores();
     if (location.hash === '#portas') {
       history.replaceState(null, '', location.pathname);
       etapa3(true);
